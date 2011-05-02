@@ -1,0 +1,40 @@
+Description:
+
+Zombie!
+
+128x128 tiles.  8 direction, 36 frames per direction.
+
+    * Stance (4 frames)
+    * Lurch (8 frames)
+    * Slam (4 frames)
+    * Bite (4 frames)
+    * Block (2 frames)
+    * Hit and Die (6 frames)
+    * Critical Death (8 frames)
+
+Blender file posted here: http://opengameart.org/content/zombie-0
+
+I use a custom Python script to render the animation in 8 directions.  Then I use this ImageMagick command to combine them:
+
+montage *.png -background "transparent" -geometry 128x128 -tile 36x8 zombie.png
+
+ 
+
+Artist:
+pfunked (OpenGameArt.org user)
+
+License(s):
+GNU GPL 2.0
+GNU GPL 3.0
+CC-BY-SA 3.0
+
+Favorites: 13
+
+Download:
+image/png icon
+zombie.png
+image/png icon
+zombie_topdown.png
+
+http://opengameart.org/content/zombie-sprites
+

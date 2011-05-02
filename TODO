@@ -1,0 +1,27 @@
+#-*- mode: org -*-
+#+TITLE: Todo-list
+
+* Moving zombies
+  * Aggro-range
+
+* Firing bullets from the player
+  * several weapons (shotgun, rocket launcher)
+
+* Using the mouse pointer to aim
+
+* Health and other attributes for players (and mobs)
+
+* DONE Speed of player not dependent on frame rate
+  CLOSED: [2011-04-30 Sat 23:11]
+
+* Map should not be a paradise island
+
+* Line of sight of player, not look through buildings, minimap(?)
+
+* Pickups
+
+* Line of sight of mobs, not follow player when he is hidden
+
+* Multiplayer
+
+* RTS phenomena
