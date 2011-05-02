@@ -25,8 +25,10 @@ from scripts.common.eventlistenerbase import EventListenerBase
 
 class Controller(EventListenerBase):
     def __init__(self, engine, survivor, world):
-        self.world = world
-        self.survivor  = survivor
+        self.engine   = engine
+        self.survivor = survivor
+        self.world    = world
+        self.camera   = world.get_camera()
 
         # self.eventmanager = engine.getEventManager()
         super(Controller, self).__init__(engine, regMouse=True, regKeys=True)
@@ -44,10 +46,9 @@ class Controller(EventListenerBase):
         keyval = evt.getKey().getValue()
         keystr = evt.getKey().getAsString().lower()
 
-        # system
+        # system keys
         if keyval == fife.Key.ESCAPE:
-            self.quit = True
-            evt.consume()
+            noop # TODO: show main menu
         elif keyval == fife.Key.F10:
             self.engine.getGuiManager().getConsole().toggleShowHide()
             evt.consume()
@@ -55,8 +56,8 @@ class Controller(EventListenerBase):
             self.engine.getRenderBackend().captureScreen('screenshot.png')
             evt.consume()
 
-        # movement
-        if keyval == self.keybindings['move_left']:
+        # movement keys
+        elif keyval == self.keybindings['move_left']:
             self.survivor.move_left  = True
         elif keyval == self.keybindings['move_right']:
             self.survivor.move_right = True
@@ -66,32 +67,21 @@ class Controller(EventListenerBase):
             self.survivor.move_up    = True
         elif keyval == self.keybindings['run']:
             self.survivor.run()
-    
 
-        # from old world.py
-        if keystr == 't':
-            r = self.cameras['main'].getRenderer('GridRenderer')
+        # debug keys
+        elif keystr == 't':
+            r = self.camera.getRenderer('GridRenderer')
             r.setEnabled(not r.isEnabled())
         elif keystr == 'c':
-            r = self.cameras['main'].getRenderer('CoordinateRenderer')
+            r = self.camera.getRenderer('CoordinateRenderer')
             r.setEnabled(not r.isEnabled())
         # elif keystr == 'r':
         #     self.world.reload()
-        elif keystr == 'q':
-            self.target_rotation = (self.target_rotation + 90) % 360
-        elif keystr == '2':
-            self.lightIntensity(0.1)
-        elif keystr == '1':
-            self.lightIntensity(-0.1)
-        elif keystr == '5':
-            self.lightSourceIntensity(25)
-        elif keystr == '4':
-            self.lightSourceIntensity(-25)
-
 
     def keyReleased(self, evt):
         keyval = evt.getKey().getValue()
-        # movement
+
+        # movement keys
         if keyval ==  self.keybindings['move_left']:
             self.survivor.move_left  = False
         elif keyval == self.keybindings['move_right']:
@@ -115,17 +105,14 @@ class Controller(EventListenerBase):
             print "selected instances on agent layer: ", [i.getObject().getId() for i in instances]
 
     def getLocationAt(self, clickpoint):
-        target_mapcoord = self.world.cameras['main'].toMapCoordinates(clickpoint, False)
+        target_mapcoord = self.camera.toMapCoordinates(clickpoint, False)
         target_mapcoord.z = 0
         location = fife.Location(self.world.agentlayer)
         location.setMapCoordinates(target_mapcoord)
         return location
 
     def getInstancesAt(self, clickpoint):
-        cameras = self.world.map.getCameras()
-        camera = cameras['main']
-
-        return self.cameras['main'].getMatchingInstances(clickpoint, self.world.agentlayer)
+        return self.camera.getMatchingInstances(clickpoint, self.world.agentlayer)
 
     def mouseReleased(self, evt):
         pass    

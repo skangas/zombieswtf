@@ -210,3 +210,5 @@ class World(EventListenerBase):
                     zombie.update()
                 # self.pump_ctr += 1
 
+        def get_camera(self):
+                return self.cameras['main']
