@@ -48,7 +48,7 @@ class Controller(EventListenerBase):
 
         # system keys
         if keyval == fife.Key.ESCAPE:
-            noop # TODO: show main menu
+            pass # TODO: show main menu
         elif keyval == fife.Key.F10:
             self.engine.getGuiManager().getConsole().toggleShowHide()
             evt.consume()
