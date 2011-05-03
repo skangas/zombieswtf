@@ -1,0 +1,44 @@
+ZombiesWTF README.
+
+-- About ZombiesWTF
+
+The game is not playable yet. It is developed in an unorganized and
+collaborative fashion. The focus is on having fun and creating the best game we
+can using given resources.
+
+-- Installation instructions
+
+1. Decide where you want to work. Set the shell variable SRC_DIR to this
+   directory:
+
+$ SRC_DIR=~/src
+
+$ cd $SRC_DIR
+
+2. Download FIFE:
+
+$ svn co http://fife.svn.cvsdude.com/engine/trunk fife
+
+3. Install FIFE dependencies. If you are on Debian/Ubuntu, it goes like:
+
+$ sudo apt-get install build-essential scons libsdl1.2-dev libboost-dev \
+  libsdl-ttf2.0-dev libsdl-image1.2-dev libvorbis-dev libalut-dev python-dev \
+  libboost-regex-dev libboost-filesystem-dev libboost-test-dev swig zlib1g-dev \
+  libxcursor-dev libopenal-dev libasound2-dev libguichan-dev
+
+4. Build Fife. (Instructions at http://wiki.fifengine.net/Building:Linux:SCons)
+
+Probably, you may just type:
+
+$ scons ext
+
+$ scons
+
+5. Run Zombies WTF like this:
+
+$ PYTHONPATH=$SRC_DIR/fife/engine/python/ ./run.py
+
+-- Contact
+
+Join #zombieswtf @ irc.freenode.net
+
