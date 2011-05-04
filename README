@@ -38,7 +38,19 @@ $ scons
 
 $ PYTHONPATH=$SRC_DIR/fife/engine/python/ ./run.py
 
+-- Licensing
+
+This game is Free Software, see COPYING for license information.
+
+All content created by us is implicitly licensed using the the CC-BY-SA v3.0
+license.
+
+All graphics, music, sound effects that is added to the game from external
+sources has to be free as well.  If you are unsure, here is a reference list of
+all acceptable licenses: http://wiki.debian.org/DFSGLicenses
+
+Be wary of some Creative Commons licenses. Some of them are non-free.
+
 -- Contact
 
 Join #zombieswtf @ irc.freenode.net
-
