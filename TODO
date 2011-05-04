@@ -1,6 +1,15 @@
 #-*- mode: org -*-
 #+TITLE: Todo-list
 
+* Graphics
+** Floor tiles
+** Buildings
+** Debree
+** Pickups
+** Weapons
+** Special effects
+** etc
+
 * Todo
 ** Firing bullets from the player
 *** Several weapons (shotgun, rocket launcher)
