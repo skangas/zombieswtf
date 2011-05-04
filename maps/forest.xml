@@ -11,7 +11,7 @@
 	<import file="../objects/mob/zombie_flare/object.xml"></import>
 	<layer x_offset="0.0" y_scale="1.0" rotation="0.0" y_offset="0.0" transparency="0" grid_type="square" pathing="cell_edges_and_diagonals" id="TechdemoMapTileLayer" x_scale="1.0">
 		<instances>
-			<i z="0.0" x="-1.0" o="sands:01" r="0" y="1.0" ns="http://www.fifengine.de/xml/rio_de_hola" stackpos="0"></i>
+			<i z="0.0" x="-1.0" o="sands:01" r="0" y="1.0" ns="http://www.fifengine.de/xml/zombieswtf" stackpos="0"></i>
 			<i z="0.0" x="0.0" o="sands:01" r="0" y="1.0" stackpos="0"></i>
 			<i z="0.0" x="0.0" o="sands:01" r="0" y="0.0" stackpos="0"></i>
 			<i z="0.0" x="-1.0" o="sands:01" r="0" y="0.0" stackpos="0"></i>

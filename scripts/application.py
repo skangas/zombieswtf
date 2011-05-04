@@ -105,7 +105,7 @@ class ZombiesWTF(ApplicationBase):
                         self.breakRequested = True
                         
                         # # get the correct directory to save the map file to
-                        # mapSaveDir = getUserDataDirectory("fife", "rio_de_hola") + "/maps"
+                        # mapSaveDir = getUserDataDirectory("fife", "zombieswtf") + "/maps"
                         
                         # # create the directory structure if it does not exist
                         # if not os.path.isdir(mapSaveDir):
