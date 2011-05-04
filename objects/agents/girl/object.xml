@@ -1,5 +1,5 @@
 <?fife type="object"?>
-<object id="girl" namespace="http://www.fifengine.de/xml/rio_de_hola" blocking="1" static="0">
+<object id="girl" namespace="http://www.fifengine.de/xml/zombieswtf" blocking="1" static="0">
 	<action id="run">
 		<animation source="run/000/animation.xml" direction="0" />
 		<animation source="run/045/animation.xml" direction="45" />

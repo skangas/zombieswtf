@@ -1,4 +1,4 @@
-<animation delay="130" namespace="http://www.fifengine.de/xml/rio_de_hola" id="bee:fall:090" x_offset="0" y_offset="0" action="8">
+<animation delay="130" namespace="http://www.fifengine.de/xml/zombieswtf" id="bee:fall:090" x_offset="0" y_offset="0" action="8">
 	<frame source="0000.png" />
 	<frame source="0001.png" />
 	<frame source="0002.png" />
