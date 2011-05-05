@@ -16,6 +16,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ########################################################################
 import random
+
+from math import hypot
 from agent import Agent
 from time import time
 from fife.extensions.fife_settings import Setting
@@ -38,7 +40,7 @@ class Survivor(Agent):
         self.move_up     = False
         self.move_down   = False
         self.last_update = time()
-        self.speed       = 5.0
+        self.speed       = 6.5
         self.sprint      = 5.0
         self.running     = 10.0
         self.walking     = 5.0
@@ -135,19 +137,24 @@ class Survivor(Agent):
         x = 0
         y = 0
         if (self.move_left):
-            x -= step
-            y -= step
+            x -= 1
+            y -= 1
         if (self.move_right):
-            x += step
-            y += step
+            x += 1
+            y += 1
         if (self.move_up):
-            x += step
-            y -= step
+            x += 1
+            y -= 1
         if (self.move_down):
-            x -= step
-            y += step
-        if x == 0 and y == 0:
+            x -= 1
+            y += 1
+        l = hypot(x,y)
+        if l == 0:
             return
+        x /= l
+        y /= l
+        x *= step
+        y *= step
 
         pos = self.agent.getLocation()
         cord = pos.getExactLayerCoordinates()
