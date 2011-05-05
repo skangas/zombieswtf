@@ -39,17 +39,3 @@ class Agent(fife.InstanceActionListener):
 
         def start(self):
                 raise Exception('No start defined for Agent')
-
-def create_anonymous_agents(settings, model, objectName, layer, agentClass):
-        agents = []
-        instances = [a for a in layer.getInstances() if a.getObject().getId() == objectName]
-        i = 0
-        for a in instances:
-                agentName = '%s:i:%d' % (objectName, i)
-                i += 1
-                agent = agentClass(settings, model, agentName, layer, False)
-                agent.agent = a
-                a.addActionListener(agent)
-                agents.append(agent)
-        return agents
-
