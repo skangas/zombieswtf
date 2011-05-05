@@ -1,21 +1,33 @@
 #-*- mode: org -*-
 #+TITLE: Todo-list
+#+STARTUP: indent
 
 * Graphics
+** Cursor (corshair?)
 ** Floor tiles
 ** Buildings
 ** Debree
 ** Pickups
 ** Weapons
 ** Special effects
-** etc
+** Logotype
+** Title screen
 
-* Todo
-** Firing bullets from the player
-*** Several weapons (shotgun, rocket launcher)
+* Game content
+** Maps
+
+* Programming
+** GUI
+*** Remove useless buttons on top
+*** Add menu when hitting escape
+*** Begin creating a HUD
+    - health
+    - weapon/ammo
+    - stamina
+** Fireing bullets from the player
+** Implement more weapons (e.g. shotgun, rocket launcher)
 ** Using the mouse pointer to aim
 ** Health and other attributes for players (and mobs)
-** Map should not be a paradise island
 ** Line of sight of player
 ** Not look through buildings
 ** Minimap
@@ -23,15 +35,17 @@
 ** Line of sight of mobs, not follow player when he is hidden
 ** Multiplayer
 *** Examine how Unknown Horizons does it
-** Lightning
+** Lightning (seems hard to get right with FIFE currently)
 *** Set light on entire map (day/night/dawn/etc)
 *** Flashlight
-* Done
+
+* Done things
 ** DONE Moving zombies
    CLOSED: [2011-05-03 Tue 13:13]
 *** DONE Aggro-range
     CLOSED: [2011-05-03 Tue 13:13]
 ** DONE Speed of player not dependent on frame rate
    CLOSED: [2011-04-30 Sat 23:11]
+
 * Future plans/crazy ideas
 ** RTS stuff??
