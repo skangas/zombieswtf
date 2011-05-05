@@ -54,7 +54,8 @@ class Survivor(Agent):
         # TODO: check if there is something we can interact with at location
 
         if (self.weapon != None):
-            self.weapon.fire(target)
+            my_loc = self.agent.getLocation().getMapCoordinates()
+            bullet = self.weapon.fire(my_loc, target)
         
     def init(self):
         self._hitpoints = 10

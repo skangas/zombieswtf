@@ -21,12 +21,11 @@ from time import time
 
 class Projectile():
     def __init__(self, x, y, angle, speed, ttl, owner):
-        self.x     = x
-        self.y     = y
-        self.angle = angle
-        self.speed = speed
-        self.owner = owner
-
+        self.x       = x
+        self.y       = y
+        self.angle   = angle
+        self.speed   = speed
+        self.owner   = owner
         self.started = time()
 
     def get_position():
@@ -38,16 +37,13 @@ class Weapon(object):
         self.speed = speed
         self.ttl   = ttl
 
-    def fire(self, target):
-        loc = self.owner.agent.getLocation().getMapCoordinates()
-        a = get_angle(loc, target)
-        print type(a), a.x, a.y
-
-        loc = self.owner.agent.getLocation().getMapCoordinates()
-        angle = get_angle(loc, target)
-
-        bullet = Projectile(loc.x, loc.y, angle, self.speed, self.ttl, self.owner)
+    def fire(self, origin, angle):
+        bullet = Projectile(origin.x, origin.y, angle, self.speed, self.ttl, self.owner)
         return bullet
+
+    def fire_at(self, origin, target):
+        angle = get_angle(origin, target)
+        fire(origin, angle)
 
 class Pistol(Weapon):
 
