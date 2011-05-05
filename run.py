@@ -30,16 +30,8 @@ import sys, os, re, math, random, shutil
 from fife import fife
 print "Using the FIFE python module found here: ", os.path.dirname(fife.__file__)
 
-from fife.extensions import *
 from scripts.application import ZombiesWTF
-from scripts import application
-from scripts import world
-from scripts.common import eventlistenerbase
-from fife.extensions.basicapplication import ApplicationBase
-from fife.extensions import pychan
-from fife.extensions.pychan import widgets
 from fife.extensions.fife_settings import Setting
-from fife.extensions.fife_utils import getUserDataDirectory
 
 TDS = Setting(app_name="zombieswtf")
 
