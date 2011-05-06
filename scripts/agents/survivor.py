@@ -111,7 +111,6 @@ class Survivor(Agent):
 
     def update(self):
         self.last_update = time()
-        blocked = False
         
         actually_moving = self.move_left ^ self.move_right or self.move_up ^ self.move_down
         
