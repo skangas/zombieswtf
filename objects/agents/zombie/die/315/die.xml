@@ -1,4 +1,4 @@
-<animation delay="100" namespace="http://www.fifengine.de/xml/zombieswtf" id="zombie_flare:die:315" x_offset="0" y_offset="0" action="0">
+<animation delay="100" namespace="zombieswtf" id="zombie_flare:die:315" x_offset="0" y_offset="0" action="0">
 	<frame source="0000.png" />
 	<frame source="0001.png" />
 	<frame source="0002.png" />
