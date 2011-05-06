@@ -31,8 +31,9 @@ STAMINA = 10
 STAMINARECOVERY = 10
 
 class Survivor(Agent):
-    def __init__(self, settings, agentName, layer, uniqInMap=True):
+    def __init__(self, engine, settings, agentName, layer, uniqInMap=True):
         super(Survivor, self).__init__(settings, None, agentName, layer, uniqInMap)
+        self.engine      = engine
         self.state       = _STATE_NONE
         self.idlecounter = 1
         self.move_left   = False
@@ -45,11 +46,12 @@ class Survivor(Agent):
         self.running     = 10.0
         self.walking     = 5.0
         self.weapon      = Pistol(self)
+        self.bullets     = []
 
-        self._score = 0
-        self._lives = 3
+        self._score           = 0
+        self._lives           = 3
         self._staminarecovery = STAMINARECOVERY
-        self.recovery = 5.0
+        self.recovery         = 5.0
         self.init()
 
     def take_action(self, target):
@@ -58,6 +60,8 @@ class Survivor(Agent):
         if (self.weapon != None):
             my_loc = self.agent.getLocation().getMapCoordinates()
             bullet = self.weapon.fire(my_loc, target)
+            bullet.create(self.engine.getModel(), self.layer)
+            self.bullets.append(bullet)
         
     def init(self):
         self._hitpoints = 10

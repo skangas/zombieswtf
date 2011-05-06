@@ -1,0 +1,4 @@
+<?fife type="object"?>
+<object id="bullet" namespace="http://www.fifengine.de/xml/zombieswtf" blocking="0" static="1">
+	<image source="bullet.png" direction="0" />
+</object>

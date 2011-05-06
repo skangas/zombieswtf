@@ -90,7 +90,7 @@ class World(EventListenerBase):
                 Initialize agents.
                 """
                 self.agentlayer = self.map.getLayer('TechdemoMapGroundObjectLayer')
-                self.survivor = Survivor(TDS, 'PC', self.agentlayer)
+                self.survivor = Survivor(self.engine, TDS, 'PC', self.agentlayer)
                 self.instance_to_agent[self.survivor.agent.getFifeId()] = self.survivor
                 self.survivor.start()
                 

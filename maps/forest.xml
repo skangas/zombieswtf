@@ -8,6 +8,7 @@
 	<import dir="../objects/items"></import>
 	<import dir="../objects/nature"></import>
 	<import dir="../objects/items/resort/deck_chairs"></import>
+	<import file="../objects/projectiles/bullet/object.xml"></import>
 	<import file="../objects/mob/zombie_flare/object.xml"></import>
 	<layer x_offset="0.0" y_scale="1.0" rotation="0.0" y_offset="0.0" transparency="0" grid_type="square" pathing="cell_edges_and_diagonals" id="TechdemoMapTileLayer" x_scale="1.0">
 		<instances>
