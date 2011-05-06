@@ -110,9 +110,11 @@ class Survivor(Agent):
             self.speed = self.walking
 
     def update(self):
+        now = time()
         self.last_update = time()
         
-        actually_moving = self.move_left ^ self.move_right or self.move_up ^ self.move_down
+        actually_moving = (self.move_left ^ self.move_right or 
+                           self.move_up ^ self.move_down)
         
         if not actually_moving:
             self.idle()
