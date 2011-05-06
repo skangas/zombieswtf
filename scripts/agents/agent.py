@@ -19,18 +19,18 @@
 from fife import fife
 
 class Agent(fife.InstanceActionListener):
-        def __init__(self, settings, model, agentName, layer, uniqInMap=True):
-                fife.InstanceActionListener.__init__(self)
-                self.settings = settings
-                self.model = model
-                self.agentName = agentName
-                self.layer = layer
-                if uniqInMap:
-                        self.agent = layer.getInstance(agentName)
-                        self.agent.addActionListener(self)
+    def __init__(self, settings, model, agentName, layer, uniqInMap=True):
+        fife.InstanceActionListener.__init__(self)
+        self.settings = settings
+        self.model = model
+        self.agentName = agentName
+        self.layer = layer
+        if uniqInMap:
+            self.agent = layer.getInstance(agentName)
+            self.agent.addActionListener(self)
 
-        def onInstanceActionFinished(self, instance, action):
-                raise Exception('No OnActionFinished defined for Agent')
+    def onInstanceActionFinished(self, instance, action):
+        raise Exception('No OnActionFinished defined for Agent')
 
-        def start(self):
-                raise Exception('No start defined for Agent')
+    def start(self):
+        raise Exception('No start defined for Agent')
