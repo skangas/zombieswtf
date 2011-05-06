@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 ########################################################################
-# Copyright (C) 2011, Stefan Kangas, Dan Rosén
+# Copyright (C) 2011, Stefan Kangas
+# Copyright (C) 2011, Dan Rosén
 ########################################################################
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,17 +23,20 @@ from scripts.util import get_direction
 from time import time
 
 class Projectile():
-    def __init__(self, name, loc, direction, speed, ttl, owner, worldRef):
+    def __init__(self, name, loc, direction, speed, ttl, damage, owner, worldRef):
+        self._name       = name
         self.loc         = loc
         self.direction   = direction
         self.speed       = speed
-        self.owner       = owner
-        self.started     = time()
-        self._name       = name
-        self.last_update = time()
         self.ttl         = ttl
-        self.active      = True
+        self.damage      = damage
+        self.owner       = owner
         self.worldRef    = worldRef
+
+        self.started     = time()
+        self.last_update = time()
+
+        self.active      = True
 
     def create(self, model, layer):
         self.layer = layer

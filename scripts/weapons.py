@@ -23,17 +23,18 @@ from scripts.projectile import *
 from time import time
 
 class Weapon(object):
-    def __init__(self, owner, speed, ttl, worldRef):
+    def __init__(self, owner, speed, ttl, damage, worldRef):
         self.owner = owner
         self.speed = speed
         self.ttl   = ttl
+        self.damage = damage
         self.worldRef = worldRef
 
     def fire(self, origin, direction):
         direction.normalize()
-        bullet = Projectile(self.get_bullet_name(), origin,
-                            direction, self.speed, self.ttl, self.owner, self.worldRef)
-        return bullet
+        return Projectile(self.get_bullet_name(), origin, direction,
+                          self.speed, self.ttl, self.damage,
+                          self.owner, self.worldRef)
 
     def fire_at(self, origin, target):
         direction = get_direction(origin, target)
@@ -44,9 +45,10 @@ class Weapon(object):
 
 class Axe(Weapon):
     def __init__(self, owner, worldRef):
-        SPEED = 10.0
-        TTL = 2.0 
-        super(Axe, self).__init__(owner, SPEED, TTL, worldRef)
+        SPEED  = 10.0
+        TTL    = 2.0
+        DAMAGE = 5.0
+        super(Axe, self).__init__(owner, SPEED, TTL, DAMAGE, worldRef)
 
     def get_bullet_name(self):
         return 'axe'
