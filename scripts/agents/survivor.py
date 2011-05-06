@@ -110,7 +110,7 @@ class Survivor(Agent):
             self.speed = self.walking
 
     def update(self):
-        now = time()
+        timediff = time() - self.last_update
         self.last_update = time()
         
         actually_moving = (self.move_left ^ self.move_right or 
@@ -124,15 +124,15 @@ class Survivor(Agent):
             self.state = _STATE_RUN
             self.agent.act('run', self.agent.getFacingLocation())
 
-        step = self.speed * (now - self.last_update)
+        step = self.speed * timediff
 
         if self.speed == self.running and not self._exhausted:
-            self._stamina -= self.sprint * (now - self.last_update)
+            self._stamina -= self.sprint * timediff
             self.run()
             print 'run'
         if self._stamina <= 0:
             self._exhausted = True
-            self._staminarecovery -= self.recovery * (now - self.last_update)
+            self._staminarecovery -= self.recovery * timediff
             print 'recovery'
         if self._staminarecovery <= 0:
             self._exhausted = False
