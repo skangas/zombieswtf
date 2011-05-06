@@ -112,8 +112,10 @@ class Survivor(Agent):
     def update(self):
         now = time()
         blocked = False
-
-        if not (self.move_left or self.move_right or self.move_up or self.move_down):
+        
+        actually_moving = self.move_left ^ self.move_right or self.move_up ^ self.move_down
+        
+        if not actually_moving:
             self.idle()
             self.last_update = now
             return
