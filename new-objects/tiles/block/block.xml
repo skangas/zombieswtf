@@ -1,0 +1,4 @@
+<?fife type="object"?>
+<object id="block" namespace="zombieswtf" blocking="1" static="1">
+	<image source="block.png" direction="0" />
+</object>

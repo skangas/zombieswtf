@@ -1,0 +1,9 @@
+<animation delay="100" namespace="PAPRG" id="player:stand:000" x_offset="0" y_offset="-25">
+	<frame source="stand_0.png" />
+	<frame source="stand_1.png" />
+	<frame source="stand_2.png" />
+	<frame source="stand_3.png" />
+	<frame source="stand_4.png" />
+	<frame source="stand_5.png" />
+	<frame source="stand_6.png" />
+</animation>

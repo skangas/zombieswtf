@@ -1,0 +1,11 @@
+<?fife type="object"?>
+<object blocking="1" id="blue_d_trolley" namespace="PARPG" static="1">
+	<image direction="0" source="blue_d_trolley_000.png" x_offset="-50" y_offset="-55" />
+	<image direction="45" source="blue_d_trolley_045.png" x_offset="0" y_offset="0" />
+	<image direction="90" source="blue_d_trolley_090.png" x_offset="0" y_offset="0" />
+	<image direction="135" source="blue_d_trolley_135.png" x_offset="0" y_offset="0" />
+	<image direction="180" source="blue_d_trolley_180.png" x_offset="0" y_offset="0" />
+	<image direction="225" source="blue_d_trolley_225.png" x_offset="0" y_offset="0" />
+	<image direction="270" source="blue_d_trolley_270.png" x_offset="0" y_offset="0" />
+	<image direction="315" source="blue_d_trolley_315.png" x_offset="0" y_offset="0" />
+</object>

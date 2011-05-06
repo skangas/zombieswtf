@@ -1,0 +1,11 @@
+<?fife type="object"?>
+<object blocking="1" id="stairs" namespace="PARPG" static="1">
+	<image direction="0" source="stairs_000.png" x_offset="0" y_offset="0" />
+	<image direction="45" source="stairs_045.png" x_offset="0" y_offset="0" />
+	<image direction="90" source="stairs_090.png" x_offset="0" y_offset="0" />
+	<image direction="135" source="stairs_135.png" x_offset="0" y_offset="0" />
+	<image direction="180" source="stairs_180.png" x_offset="0" y_offset="0" />
+	<image direction="225" source="stairs_225.png" x_offset="0" y_offset="0" />
+	<image direction="270" source="stairs_270.png" x_offset="0" y_offset="0" />
+	<image direction="315" source="stairs_315.png" x_offset="0" y_offset="0" />
+</object>

@@ -1,0 +1,5 @@
+<?fife type="object"?>
+<object id="new_stool" namespace="PARPG" blocking="1" static="1">
+	<image source="new_stool.png" direction="0" x_offset="0" y_offset="0" />
+</object>
+

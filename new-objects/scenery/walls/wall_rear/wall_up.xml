@@ -1,0 +1,4 @@
+<?fife type="object"?>
+<object id="wall_rear_up" namespace="zombieswtf" blocking="1" static="1">
+	<image source="wall_up.png" direction="0" y_offset="-34"/>
+</object>

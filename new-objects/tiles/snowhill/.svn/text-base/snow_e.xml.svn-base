@@ -1,0 +1,4 @@
+<?fife type="object"?>
+<object id="snowhill_e" namespace="PARPG" blocking="0" static="1">
+	<image source="snow_e.png" direction="0" />
+</object>

@@ -1,0 +1,17 @@
+<animation delay="100" namespace="PAPRG" id="player:use:090" x_offset="0" y_offset="-25">
+	<frame source="use_0.png" />
+	<frame source="use_1.png" />
+	<frame source="use_2.png" />
+	<frame source="use_3.png" />
+	<frame source="use_4.png" />
+	<frame source="use_5.png" />
+	<frame source="use_6.png" />
+	<frame source="use_7.png" />
+	<frame source="use_8.png" />
+	<frame source="use_9.png" />
+	<frame source="use_10.png" />
+	<frame source="use_11.png" />
+	<frame source="use_12.png" />
+	<frame source="use_13.png" />
+	<frame source="use_14.png" />
+</animation>

@@ -1,0 +1,15 @@
+<?fife type="object"?>
+<object id="lock_box_metal01" namespace="PARPG" blocking="1" static="0">
+	<action id="closed">
+		<animation source="closed/animation.xml"/>
+	</action>
+	<action id="open">
+		<animation source="open/animation.xml"/>
+	</action>
+	<action id="opened">
+		<animation source="opened/animation.xml"/>
+	</action>
+	<action id="close">
+		<animation source="close/animation.xml"/>
+	</action>
+</object>

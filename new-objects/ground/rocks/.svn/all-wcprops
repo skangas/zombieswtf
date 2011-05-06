@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/parpg/!svn/ver/694/trunk/game/objects/ground/rocks
+END
+rock.license
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/parpg/!svn/ver/694/trunk/game/objects/ground/rocks/rock.license
+END
+rock01_snow.png
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/parpg/!svn/ver/694/trunk/game/objects/ground/rocks/rock01_snow.png
+END
+rock01_temperate.png
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/parpg/!svn/ver/694/trunk/game/objects/ground/rocks/rock01_temperate.png
+END
+rock02_snow.png
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/parpg/!svn/ver/694/trunk/game/objects/ground/rocks/rock02_snow.png
+END
+rock02_temperate.png
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/parpg/!svn/ver/694/trunk/game/objects/ground/rocks/rock02_temperate.png
+END

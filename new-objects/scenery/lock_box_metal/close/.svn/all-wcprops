@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/parpg/!svn/ver/504/trunk/game/objects/scenery/lock_box_metal/close
+END
+lock_05.png
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/parpg/!svn/ver/404/trunk/game/objects/scenery/lock_box_metal/close/lock_05.png
+END
+lock_01.png
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/parpg/!svn/ver/404/trunk/game/objects/scenery/lock_box_metal/close/lock_01.png
+END
+lock_02.png
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/parpg/!svn/ver/404/trunk/game/objects/scenery/lock_box_metal/close/lock_02.png
+END
+lock_03.png
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/parpg/!svn/ver/404/trunk/game/objects/scenery/lock_box_metal/close/lock_03.png
+END
+animation.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/parpg/!svn/ver/428/trunk/game/objects/scenery/lock_box_metal/close/animation.xml
+END
+lock_04.png
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/parpg/!svn/ver/404/trunk/game/objects/scenery/lock_box_metal/close/lock_04.png
+END

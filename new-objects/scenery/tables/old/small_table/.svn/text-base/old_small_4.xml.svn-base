@@ -1,0 +1,5 @@
+<?fife type="object"?>
+<object id="old_small_table_4" namespace="PARPG" blocking="1" static="1">
+	<image source="old_small_4.png" direction="0" x_offset="0" y_offset="0" />
+</object>
+

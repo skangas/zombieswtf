@@ -1,0 +1,4 @@
+<?fife type="object"?>
+<object blocking="1" id="trashcan" namespace="PARPG" static="1">
+	<image direction="0" source="trashcan.png" x_offset="0" y_offset="0" />
+</object>

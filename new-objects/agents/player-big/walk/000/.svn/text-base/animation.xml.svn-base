@@ -1,0 +1,14 @@
+<animation delay="100" namespace="PAPRG" id="player:walk:000" x_offset="0" y_offset="-25">
+	<frame source="walk_0.png" />
+	<frame source="walk_1.png" />
+	<frame source="walk_2.png" />
+	<frame source="walk_3.png" />
+	<frame source="walk_4.png" />
+	<frame source="walk_5.png" />
+	<frame source="walk_6.png" />
+	<frame source="walk_7.png" />
+	<frame source="walk_8.png" />
+	<frame source="walk_9.png" />
+	<frame source="walk_10.png" />
+	<frame source="walk_11.png" />
+</animation>

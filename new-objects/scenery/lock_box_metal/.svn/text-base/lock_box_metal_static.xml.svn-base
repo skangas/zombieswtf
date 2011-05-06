@@ -1,0 +1,4 @@
+<?fife type="object"?>
+<object id="lock_box_metal_static" namespace="PARPG" blocking="1" static="1">
+	<image source="lock_01.png" direction="0" x_offset="8" y_offset="-8" />
+</object>

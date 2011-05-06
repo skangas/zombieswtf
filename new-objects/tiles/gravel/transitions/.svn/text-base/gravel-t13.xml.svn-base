@@ -1,0 +1,4 @@
+<?fife type="object"?>
+<object id="gravel-t13" namespace="PARPG" blocking="0" static="1">
+	<image source="gravel-t13.png" direction="0" />
+</object>

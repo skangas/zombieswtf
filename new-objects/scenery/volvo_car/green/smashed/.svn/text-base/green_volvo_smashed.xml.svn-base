@@ -1,0 +1,12 @@
+<?fife type="object"?>
+<object blocking="1" id="green_volvo_smashed" namespace="PARPG" static="1">
+	<image direction="000" source="green_volvo_smashed_000.png" x_offset="0" y_offset="0"/>
+	<image direction="045" source="green_volvo_smashed_045.png" x_offset="0" y_offset="0"/>
+	<image direction="090" source="green_volvo_smashed_090.png" x_offset="0" y_offset="0"/>
+	<image direction="135" source="green_volvo_smashed_135.png" x_offset="0" y_offset="0"/>
+	<image direction="180" source="green_volvo_smashed_180.png" x_offset="0" y_offset="0"/>
+	<image direction="225" source="green_volvo_smashed_225.png" x_offset="0" y_offset="0"/>
+	<image direction="270" source="green_volvo_smashed_270.png" x_offset="0" y_offset="0"/>
+	<image direction="315" source="green_volvo_smashed_315.png" x_offset="0" y_offset="0"/>
+</object>
+<!-- Automatically made with ObjectXmlGenerator -->

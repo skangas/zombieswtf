@@ -1,0 +1,13 @@
+<?fife type="object"?>
+<object blocking="1" id="woodstove-lit" namespace="PARPG" static="1">
+	<action id="lit">
+		<animation direction="0" source="lit/000/animation.xml" />
+		<animation direction="45" source="lit/045/animation.xml" />
+		<animation direction="90" source="lit/090/animation.xml" />
+		<animation direction="135" source="lit/135/animation.xml" />
+		<animation direction="180" source="lit/180/animation.xml" />
+		<animation direction="225" source="lit/225/animation.xml" />
+		<animation direction="270" source="lit/270/animation.xml" />
+		<animation direction="315" source="lit/315/animation.xml" />
+    </action>
+</object>

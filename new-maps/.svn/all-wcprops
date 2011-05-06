@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/parpg/!svn/ver/818/trunk/game/maps
+END
+map_agents.yaml
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/parpg/!svn/ver/594/trunk/game/maps/map_agents.yaml
+END
+real_map.xml
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/parpg/!svn/ver/694/trunk/game/maps/real_map.xml
+END
+map2_agents.yaml
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/parpg/!svn/ver/594/trunk/game/maps/map2_agents.yaml
+END
+maps.license
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/parpg/!svn/ver/818/trunk/game/maps/maps.license
+END
+maps.yaml
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/parpg/!svn/ver/563/trunk/game/maps/maps.yaml
+END
+all_agents.yaml
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/parpg/!svn/ver/668/trunk/game/maps/all_agents.yaml
+END
+map.xml
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/parpg/!svn/ver/695/trunk/game/maps/map.xml
+END
+techdemo1_ground_level.xml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/parpg/!svn/ver/694/trunk/game/maps/techdemo1_ground_level.xml
+END
+map2.xml
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/parpg/!svn/ver/694/trunk/game/maps/map2.xml
+END

@@ -70,7 +70,7 @@ class World(EventListenerBase):
                 # self.light_intensity = 1
                 # self.light_sources = 0
 
-                self.load('maps/forest.xml')
+                self.load('new-maps/snow.xml')
 
                 self.controller = Controller(self.engine, self.survivor, self)
 
@@ -89,12 +89,12 @@ class World(EventListenerBase):
                 """
                 Initialize agents.
                 """
-                self.agentlayer = self.map.getLayer('TechdemoMapGroundObjectLayer')
-                self.survivor = Survivor(self.engine, TDS, 'PC', self.agentlayer)
+                self.agentlayer = self.map.getLayer('ObjectLayer')
+                self.survivor = Survivor(self.engine, TDS, 'player', self.agentlayer)
                 self.instance_to_agent[self.survivor.agent.getFifeId()] = self.survivor
                 self.survivor.start()
                 
-                self.zombies = create_mob_agents(TDS, self.model, 'zombie_flare', self.agentlayer, Zombie)
+                self.zombies = create_mob_agents(TDS, self.model, 'zombie', self.agentlayer, Zombie)
                 for zombie in self.zombies:
                     self.instance_to_agent[zombie.agent.getFifeId()] = zombie
                     zombie.aggro(self.survivor)
@@ -165,9 +165,11 @@ class World(EventListenerBase):
                 # The following renderers are used for debugging.
                 # Note that by default ( that is after calling View.resetRenderers or Camera.resetRenderers )
                 # renderers will be handed all layers. That's handled here.
-                renderer = self.cameras['main'].getRenderer('CoordinateRenderer')
-                renderer.clearActiveLayers()
-                renderer.addActiveLayer(self.map.getLayer(str(TDS.get("rio", "CoordinateLayerName"))))
+
+                # XXX: Dan: could not get these to work after changing map
+                #renderer = self.cameras['main'].getRenderer('CoordinateRenderer')
+                #renderer.clearActiveLayers()
+                #renderer.addActiveLayer(self.map.getLayer(str(TDS.get("rio", "CoordinateLayerName"))))
 
                 renderer = self.cameras['main'].getRenderer('QuadTreeRenderer')
                 renderer.setEnabled(True)
@@ -180,7 +182,7 @@ class World(EventListenerBase):
                         renderer = fife.LightRenderer.getInstance(self.cameras['main'])
                         renderer.setEnabled(True)
                         renderer.clearActiveLayers()
-                        renderer.addActiveLayer(self.map.getLayer('TechdemoMapGroundObjectLayer'))
+                        renderer.addActiveLayer(self.map.getLayer('ObjectLayer'))
         
                         self.target_rotation = self.cameras['main'].getRotation()
 

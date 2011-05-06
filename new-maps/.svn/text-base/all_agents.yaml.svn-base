@@ -1,0 +1,253 @@
+#   This file is part of PARPG.
+
+#   PARPG is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+
+#   PARPG is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+
+#   You should have received a copy of the GNU General Public License
+#   along with PARPG.  If not, see <http://www.gnu.org/licenses/>.
+---            
+PlayerCharacter:
+    ViewName: "Player Character"
+    RealName: "Player Character"
+    ObjectType: "PlayerCharacter"
+    ObjectModel: "player"
+    Map: "Mall"
+    Position: [2.0, -8.0]
+    Rotation: 0
+    Inventory:
+    - {ID: "Small pocket knife", type: "Small pocket knife", slot: "right_hand"}
+    - {ID: "Beer", type: "Beer"}
+    - {ID: "Pamphlet", type: "Pamphlet"}
+    - {ID: "Pot", type: "Pot"}
+---            
+Old Man:
+    ViewName: "Old Man"
+    RealName: "Old Man"
+    ObjectType: "NonPlayerCharacter"
+    ObjectModel: "long_coat_male"
+    Text: "An old, frail-looking man."
+    Map: "Mall"
+    Position: [10.0, 0.0]
+    Rotation: 0
+---            
+Janie:
+    ViewName: "Janie"
+    RealName: "Janie"
+    ObjectType: "NonPlayerCharacter"
+    ObjectModel: "long_coat_female"
+    Text: "A woman wearing a large coat, and a big gun."
+    Map: "Mall"
+    Position: [-5.0, -3.0]
+    Rotation: 0
+    Inventory:
+    - {ID: "Box", type: "Box"}
+---
+Bart The Drunkard:
+    ViewName: "Bart"
+    RealName: "Bart"
+    ObjectType: "NonPlayerCharacter"
+    ObjectModel: "long_coat_male"
+    Text: "A very drunk looking man."
+    Map: "Mall"
+    Position: [-5.0, -4.0]
+    Rotation: 0
+---
+Skwisgaar the Crazy Swede:
+    ViewName: "Skwisgaar"
+    RealName: "Skwisgaar"
+    ObjectType: "NonPlayerCharacter"
+    ObjectModel: "male_traveler_1"
+    Text: "A wild-eyed man with an axe."
+    Map: "Mall"
+    Position: [-5.0, -6.0]
+    Rotation: 0
+    Inventory:
+    - {ID: "yeast", type: "Yeast"}
+---
+Matti:
+    ViewName: "Matti"
+    RealName: "Matti"
+    ObjectType: "NonPlayerCharacter"
+    ObjectModel: "male_traveler_1"
+    Text: "A man shoveling snow into a hole."
+    Map: "Mall"
+    Position: [-8.0, -6.0]
+    Rotation: 0
+---
+Dig:
+    ViewName: "Dig"
+    RealName: "Dig"
+    ObjectType: "NonPlayerCharacter"
+    ObjectModel: "male_traveler_1"
+    Text: "A tough looking dude."
+    Map: "Mall"
+    Position: [2.0, -6.0] 
+    Rotation: 0
+---
+Jacob:
+    ViewName: "Jacob"
+    RealName: "Jacob"
+    ObjectType: "NonPlayerCharacter"
+    ObjectModel: "long_coat_male"
+    Text: "A lean man with a sharp face and an appraising gaze."
+    Map: "Mall"
+    Position: [3.0, -6.0] 
+    Rotation: 0
+---
+Kimmo Niitty:
+    ViewName: "Kimmo"
+    RealName: "Kimmo"
+    ObjectType: "NonPlayerCharacter"
+    ObjectModel: "male_traveler_1"
+    Text: "An older man who exudes confidence and ability."
+    Map: "Mall"
+    Position: [4.0, -6.0]
+    Rotation: 0
+---
+Helja:
+    ViewName: "Helja"
+    RealName: "Helja"
+    ObjectType: "NonPlayerCharacter"
+    ObjectModel: "npc_woman"
+    Text: "A business-like woman, short and stout."
+    Map: "Mall"
+    Position: [5.0, -7.0]
+    Rotation: 0
+---
+Ma Niitty:
+    ViewName: "Aino"
+    RealName: "Aino"
+    ObjectType: "NonPlayerCharacter"
+    ObjectModel: "npc_woman"
+    Text: "An ancient crone with a tight lipped smile.  She has an unlit cigarette dangling from her lips."
+    Map: "Mall"
+    Position: [-6.0, -7.0]
+    Rotation: 0
+---
+Kandi:
+    ViewName: "Kandi"
+    RealName: "Kandi"
+    ObjectType: "NonPlayerCharacter"
+    ObjectModel: "npc_woman"
+    Text: "A dark haired, scantily clad woman giving you the once over."
+    Map: "Mall"
+    Position: [-7.0, -7.0]
+    Rotation: 0
+---
+Cali:
+    ViewName: "Cali"
+    RealName: "Cali"
+    ObjectType: "NonPlayerCharacter"
+    ObjectModel: "npc_woman"
+    Text: "A scantily clad blond, checking you out."
+    Map: "Mall"
+    Position: [-8.0, -7.0]
+    Rotation: 0
+---
+Camilla Niitty:
+    ViewName: "Camilla"
+    RealName: "Camilla Niitty"
+    ObjectType: "NonPlayerCharacter"
+    ObjectModel: "long_coat_female"
+    Text: "A hard-faced pretty young woman. She seems to be scowling."
+    Map: "Mall"
+    Position: [-5.0, -7.0]
+    Rotation: 0
+---
+Synnove Niitty:
+    ViewName: "Synnove"
+    RealName: "Synnove"
+    ObjectType: "NonPlayerCharacter"
+    ObjectModel: "long_coat_female"
+    Text: "A plain looking girl with a faraway look in her eye."
+    Map: "Mall"
+    Position: [-5.0, -9.0]
+    Rotation: 0
+---
+Farmer Manslow:
+    ViewName: "Manslow"
+    RealName: "Manslow"
+    ObjectType: "NonPlayerCharacter"
+    ObjectModel: "male_farmer_1"
+    Text: "A grimy looking farmer."
+    Map: "Farm"
+    Position: [-3.0, -3.0]
+    Rotation: 0
+    Inventory:
+        - {ID: bushel_of_grain, type: Grain}
+---            
+Sami:
+    ViewName: "Sami"
+    RealName: "Sami"
+    ObjectType: "NonPlayerCharacter"
+    ObjectModel: "long_coat_male"
+    Text: "An earstwhile boy, working hard."
+    Map: "Farm"
+    Position: [3.0, 4.0]
+    Rotation: 0
+---            
+Rasmus:
+    ViewName: "Rasmus"
+    RealName: "Rasmus"
+    ObjectType: "NonPlayerCharacter"
+    ObjectModel: "long_coat_male"
+    Text: "A grimy looking farmer."
+    Map: "Farm"
+    Position: [4.0, 3.0]
+    Rotation: 0
+---
+Bottle:
+    ViewName: Bottle
+    ObjectType: "MapItem"
+    ItemType: "Empty beer bottle"
+    Map: "Mall"
+    Position: [-5.0, -11.0]
+    Rotation: 0
+---
+Potato:
+    ViewName: Wild potato
+    ObjectType: "MapItem"
+    ItemType: "Wild potato"
+    Map: "Farm"
+    Position: [7.0, -16.0]
+    Rotation: 0
+---
+Yam:
+    ViewName: Yam
+    ObjectType: "MapItem"
+    ItemType: "Rotten yam"
+    Map: "Farm"
+    Position: [-4.0, 0.0]
+    Rotation: 0
+---
+Wood:
+    ViewName: Wood
+    ObjectType: "MapItem"
+    ItemType: "Wood"
+    Map: "Mall"
+    Position: [10.0, 8.0]
+    Rotation: 0
+---
+Questionable Water:
+    ViewName: Water
+    ObjectType: "MapItem"
+    ItemType: "Questionable water"
+    Map: "Mall"
+    Position: [9.0, -33.0]
+    Rotation: 0
+---
+Pure Water:
+    ViewName: Water
+    ObjectType: "MapItem"
+    ItemType: "Pure water"
+    Map: "Mall"
+    Position: [12.0, -42.0]
+    Rotation: 0
+    

@@ -1,0 +1,12 @@
+<?fife type="object"?>
+<object id="bed_c" namespace="PARPG" blocking="0" static="1">
+	<image source="bed_c_000.png" direction="0" x_offset="0" y_offset="30" />
+	<image source="bed_c_045.png" direction="45" x_offset="0" y_offset="44" />
+	<image source="bed_c_090.png" direction="90" x_offset="0" y_offset="41" />
+	<image source="bed_c_135.png" direction="135" x_offset="0" y_offset="43" />
+	<image source="bed_c_180.png" direction="180" x_offset="0" y_offset="30" />
+	<image source="bed_c_225.png" direction="225" x_offset="0" y_offset="44" />
+	<image source="bed_c_270.png" direction="270" x_offset="0" y_offset="39" />
+	<image source="bed_c_315.png" direction="315" x_offset="0" y_offset="44" />
+</object>
+

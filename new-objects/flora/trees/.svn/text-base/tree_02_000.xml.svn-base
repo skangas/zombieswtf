@@ -1,0 +1,5 @@
+<?fife type="object"?>
+<object id="tree_02" namespace="PARPG" blocking="1" static="1">
+    <image source="tree_02_000.png" direction="0" x_offset="50" y_offset="-150" />
+</object>
+

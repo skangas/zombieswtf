@@ -1,0 +1,4 @@
+<?fife type="object"?>
+<object id="fdoor" namespace="PARPG" blocking="1" static="1">
+	<image source="floor.png" direction="0" />
+</object>

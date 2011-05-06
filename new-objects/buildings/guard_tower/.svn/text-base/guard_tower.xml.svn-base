@@ -1,0 +1,7 @@
+<?fife type="object"?>
+<object blocking="1" id="guard_tower" namespace="PARPG" static="1">
+	<image direction="45" source="guard_tower_045.png" x_offset="140" y_offset="-170" />
+	<image direction="135" source="guard_tower_135.png" x_offset="88" y_offset="-170" />
+	<image direction="225" source="guard_tower_225.png" x_offset="140" y_offset="-170" />
+	<image direction="315" source="guard_tower_315.png" x_offset="88" y_offset="-170" />
+</object>

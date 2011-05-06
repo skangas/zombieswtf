@@ -1,0 +1,8 @@
+<?fife type="object"?>
+<object id="black_chair_lying" namespace="PARPG" blocking="1" static="1">
+	<image source="black_chair_lying_045.png" direction="45" x_offset="0" y_offset="0" />
+	<image source="black_chair_lying_135.png" direction="135" x_offset="0" y_offset="0" />
+	<image source="black_chair_lying_225.png" direction="225" x_offset="0" y_offset="0" />
+	<image source="black_chair_lying_315.png" direction="315" x_offset="0" y_offset="0" />
+</object>
+

@@ -1,0 +1,13 @@
+<animation delay="100" namespace="PAPRG" id="woodstove:lit:045" x_offset="0" y_offset="-15">
+	<frame source="woodstove_1.png" />
+	<frame source="woodstove_2.png" />
+	<frame source="woodstove_3.png" />
+	<frame source="woodstove_4.png" />
+	<frame source="woodstove_5.png" />
+	<frame source="woodstove_6.png" />
+	<frame source="woodstove_7.png" />
+	<frame source="woodstove_8.png" />
+	<frame source="woodstove_9.png" />
+	<frame source="woodstove_10.png" />
+	<frame source="woodstove_11.png" />
+</animation>

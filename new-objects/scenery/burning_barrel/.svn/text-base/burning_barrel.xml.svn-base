@@ -1,0 +1,6 @@
+<?fife type="object"?>
+<object id="burning_barrel" namespace="PARPG" blocking="1" static="0">
+	<action id="burn">
+		<animation source="burn/000/animation.xml" direction="0" />
+	</action>
+</object>

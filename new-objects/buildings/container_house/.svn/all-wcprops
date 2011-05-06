@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/parpg/!svn/ver/695/trunk/game/objects/buildings/container_house
+END
+container_house_01.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/parpg/!svn/ver/694/trunk/game/objects/buildings/container_house/container_house_01.xml
+END
+container_house_02.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/parpg/!svn/ver/694/trunk/game/objects/buildings/container_house/container_house_02.xml
+END
+container_house.license
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/parpg/!svn/ver/495/trunk/game/objects/buildings/container_house/container_house.license
+END
+container_house_01_000.png
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/parpg/!svn/ver/694/trunk/game/objects/buildings/container_house/container_house_01_000.png
+END
+container_house_02_000.png
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/parpg/!svn/ver/694/trunk/game/objects/buildings/container_house/container_house_02_000.png
+END

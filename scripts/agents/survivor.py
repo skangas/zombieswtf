@@ -34,6 +34,8 @@ class Survivor(Agent):
     def __init__(self, engine, settings, agentName, layer, uniqInMap=True):
         super(Survivor, self).__init__(settings, None, agentName, layer, uniqInMap)
         self.engine      = engine
+        #self.agent.setOverrideBlocking(True)
+        #self.agent.setBlocking(False)
         self.state       = _STATE_NONE
         self.idlecounter = 1
         self.move_left   = False
@@ -177,7 +179,7 @@ class Survivor(Agent):
         # Make sure the space is not blocked
         instances = self.agent.getLocationRef().getLayer().getInstancesAt(pos)
         for i in instances:
-            if i.getId() == 'PC':
+            if i.getId() == 'player':
                 continue
             if i.isBlocking():
                 print "BLOCK", i.getId()

@@ -1,0 +1,4 @@
+<?fife type="object"?>
+<object id="crate" namespace="PARPG" blocking="1" static="1">
+	<image source="crate.png" direction="0" x_offset="0" y_offset="-15" />
+</object>

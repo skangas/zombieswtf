@@ -1,0 +1,4 @@
+<?fife type="object"?>
+<object id="wall_front_bottom" namespace="PARPG" blocking="1" static="1">
+	<image source="wall_bottom.png" direction="0" y_offset="-8"/>
+</object>

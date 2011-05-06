@@ -1,0 +1,11 @@
+<?fife type="object"?>
+<object id="toolboard" namespace="PARPG" blocking="1" static="1">
+	<image source="toolboard_000.png" direction="0" x_offset="0" y_offset="0" />
+	<image source="toolboard_045.png" direction="45" x_offset="0" y_offset="0" />
+	<image source="toolboard_090.png" direction="90" x_offset="0" y_offset="0" />
+	<image source="toolboard_135.png" direction="135" x_offset="0" y_offset="0" />
+	<image source="toolboard_180.png" direction="180" x_offset="0" y_offset="0" />
+	<image source="toolboard_225.png" direction="225" x_offset="0" y_offset="0" />
+	<image source="toolboard_270.png" direction="270" x_offset="0" y_offset="0" />
+	<image source="toolboard_315.png" direction="315" x_offset="0" y_offset="0" />
+</object>
