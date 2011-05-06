@@ -37,7 +37,7 @@ class Weapon(object):
 
     def fire_at(self, origin, target):
         direction = get_direction(origin, target)
-        fire(origin, direction)
+        return self.fire(origin, direction)
 
     def get_bullet_name(self):
         raise Exception("Programming Error: not implemented")

@@ -61,7 +61,7 @@ class Survivor(Agent):
 
         if (self.weapon != None):
             my_loc = self.agent.getLocation().getMapCoordinates()
-            bullet = self.weapon.fire(my_loc, target)
+            bullet = self.weapon.fire_at(my_loc, target)
             bullet.create(self.engine.getModel(), self.layer)
             self.projectiles.append(bullet)
         
