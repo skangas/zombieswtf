@@ -8,7 +8,6 @@
 	<import dir="../objects/items"></import>
 	<import dir="../objects/nature"></import>
 	<import dir="../objects/items/resort/deck_chairs"></import>
-	<import file="../objects/projectiles/bullet/object.xml"></import>
 	<import file="../objects/mob/zombie_flare/object.xml"></import>
 	<layer rotation="0.0" id="TechdemoMapTileLayer" grid_type="square" pathing="cell_edges_and_diagonals" y_offset="0.0" transparency="0" y_scale="1.0" x_offset="0.0" x_scale="1.0">
 		<instances>
@@ -6036,7 +6035,7 @@
 			<i y="-31.0" r="0" x="-40.0" z="0.0" stackpos="0" o="beekeeper"></i>
 			<i y="19.0" r="0" x="43.0" z="0.0" stackpos="0" o="hippie_priest"></i>
 			<i id="PC" y="10.0" r="0" x="10.0" z="0.0" stackpos="0" o="boy"></i>
-			<i id="NPC:girl" y="2.0" r="0" x="10.0" z="0.0" stackpos="0" o="zombie_flare"></i>
+			<i y="2.0" r="0" x="10.0" z="0.0" stackpos="0" o="zombie_flare"></i>
 			<i y="2.0" r="180" x="-19.0" z="0.0" stackpos="0" o="beach_bar"></i>
 			<i y="13.0" r="0" x="4.0" z="0.0" stackpos="0" o="trees:01"></i>
 			<i y="13.0" r="0" x="2.0" z="0.0" stackpos="0" o="trees:01"></i>
@@ -6051,7 +6050,7 @@
 			<i y="21.0" r="0" x="0.0" z="0.0" stackpos="0" o="trees:08"></i>
 			<i y="21.0" r="0" x="2.0" z="0.0" stackpos="0" o="trees:08"></i>
 			<i y="20.0" r="0" x="3.0" z="0.0" stackpos="0" o="trees:08"></i>
-			<i id="NPC:girl" y="2.0" r="0" x="-22.0" z="0.0" stackpos="0" o="zombie_flare"></i>
+			<i y="2.0" r="0" x="-22.0" z="0.0" stackpos="0" o="zombie_flare"></i>
 			<i y="18.0" r="0" x="6.0" z="0.0" stackpos="0" o="zombie_flare"></i>
 			<i y="18.0" r="0" x="4.0" z="0.0" stackpos="0" o="zombie_flare"></i>
 			<i y="16.0" r="0" x="3.0" z="0.0" stackpos="0" o="zombie_flare"></i>
