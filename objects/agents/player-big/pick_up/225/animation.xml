@@ -1,0 +1,20 @@
+<animation delay="100" namespace="PAPRG" id="player:pick_up:225" x_offset="0" y_offset="-25">
+	<frame source="pick_up_0.png" />
+	<frame source="pick_up_1.png" />
+	<frame source="pick_up_2.png" />
+	<frame source="pick_up_3.png" />
+	<frame source="pick_up_4.png" />
+	<frame source="pick_up_5.png" />
+	<frame source="pick_up_6.png" />
+	<frame source="pick_up_7.png" />
+	<frame source="pick_up_8.png" />
+	<frame source="pick_up_9.png" />
+	<frame source="pick_up_10.png" />
+	<frame source="pick_up_11.png" />
+	<frame source="pick_up_12.png" />
+	<frame source="pick_up_13.png" />
+	<frame source="pick_up_14.png" />
+	<frame source="pick_up_15.png" />
+	<frame source="pick_up_16.png" />
+	<frame source="pick_up_17.png" />
+</animation>

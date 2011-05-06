@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ########################################################################
-# Copyright (C) 2011, Stefan Kangas
+# Copyright (C) 2011, Stefan Kangas, Dan Rosén
 ########################################################################
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,39 +16,47 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ########################################################################
 
-from scripts.util import get_angle
+from fife import fife
+from fife.fife import InstanceVisual
+from scripts.util import get_direction
+from scripts.projectile import *
 from time import time
 
-class Projectile():
-    def __init__(self, x, y, angle, speed, ttl, owner):
-        self.x       = x
-        self.y       = y
-        self.angle   = angle
-        self.speed   = speed
-        self.owner   = owner
-        self.started = time()
-
-    def get_position():
-        pass
-
 class Weapon(object):
-    def __init__(self, owner, speed, ttl):
+    def __init__(self, owner, speed, ttl, damage):
         self.owner = owner
         self.speed = speed
         self.ttl   = ttl
+        self.damage = damage
 
-    def fire(self, origin, angle):
-        bullet = Projectile(origin.x, origin.y, angle, self.speed, self.ttl, self.owner)
-        return bullet
+    def fire(self, origin, direction):
+        direction.normalize()
+        return Projectile(self.get_bullet_name(), origin, direction,
+                          self.speed, self.ttl, self.damage,
+                          self.owner)
 
     def fire_at(self, origin, target):
-        angle = get_angle(origin, target)
-        fire(origin, angle)
+        direction = get_direction(origin, target)
+        return self.fire(origin, direction)
+
+    def get_bullet_name(self):
+        raise Exception("Programming Error: not implemented")
+
+class Axe(Weapon):
+    def __init__(self, owner):
+        SPEED  = 10.0
+        TTL    = 2.0
+        DAMAGE = 5.0
+        super(Axe, self).__init__(owner, SPEED, TTL, DAMAGE)
+
+    def get_bullet_name(self):
+        return 'axe'
 
 class Pistol(Weapon):
-
     def __init__(self, owner):
         SPEED = 10.0
         TTL = 2.5
         super(Pistol, self).__init__(owner, SPEED, TTL)
 
+    def get_bullet_name(self):
+        return 'bullet'

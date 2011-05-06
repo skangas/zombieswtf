@@ -70,7 +70,7 @@ class World(EventListenerBase):
                 # self.light_intensity = 1
                 # self.light_sources = 0
 
-                self.load('maps/forest.xml')
+                self.load('maps/snow.xml')
 
                 self.controller = Controller(self.engine, self.survivor, self)
 
@@ -89,12 +89,12 @@ class World(EventListenerBase):
                 """
                 Initialize agents.
                 """
-                self.agentlayer = self.map.getLayer('TechdemoMapGroundObjectLayer')
-                self.survivor = Survivor(TDS, 'PC', self.agentlayer)
+                self.agentlayer = self.map.getLayer('ObjectLayer')
+                self.survivor = Survivor(self.engine, TDS, 'player', self.agentlayer)
                 self.instance_to_agent[self.survivor.agent.getFifeId()] = self.survivor
                 self.survivor.start()
                 
-                self.zombies = create_mob_agents(TDS, self.model, 'zombie_flare', self.agentlayer, Zombie)
+                self.zombies = create_mob_agents(TDS, self.model, 'zombie', self.agentlayer, Zombie)
                 for zombie in self.zombies:
                     self.instance_to_agent[zombie.agent.getFifeId()] = zombie
                     zombie.aggro(self.survivor)
@@ -165,9 +165,11 @@ class World(EventListenerBase):
                 # The following renderers are used for debugging.
                 # Note that by default ( that is after calling View.resetRenderers or Camera.resetRenderers )
                 # renderers will be handed all layers. That's handled here.
-                renderer = self.cameras['main'].getRenderer('CoordinateRenderer')
-                renderer.clearActiveLayers()
-                renderer.addActiveLayer(self.map.getLayer(str(TDS.get("rio", "CoordinateLayerName"))))
+
+                # XXX: Dan: could not get these to work after changing map
+                #renderer = self.cameras['main'].getRenderer('CoordinateRenderer')
+                #renderer.clearActiveLayers()
+                #renderer.addActiveLayer(self.map.getLayer(str(TDS.get("rio", "CoordinateLayerName"))))
 
                 renderer = self.cameras['main'].getRenderer('QuadTreeRenderer')
                 renderer.setEnabled(True)
@@ -180,7 +182,7 @@ class World(EventListenerBase):
                         renderer = fife.LightRenderer.getInstance(self.cameras['main'])
                         renderer.setEnabled(True)
                         renderer.clearActiveLayers()
-                        renderer.addActiveLayer(self.map.getLayer('TechdemoMapGroundObjectLayer'))
+                        renderer.addActiveLayer(self.map.getLayer('ObjectLayer'))
         
                         self.target_rotation = self.cameras['main'].getRotation()
 
@@ -201,8 +203,32 @@ class World(EventListenerBase):
                 """
 
                 self.survivor.update()
+
+                for p in self.survivor.projectiles:
+                    p.update()
+
+                    if not p.active:
+                            continue
+
+                    pos = p.get_position()
+                    instances = p.layer.getInstancesAt(pos,False)
+                    for i in instances:
+                            # TODO: depending on object type, keep track of our own collision box,
+                            # and check if we are colliding
+                            if i.getObject().getId() == "zombie" and i.isBlocking():
+                                    damage = p.hit()
+                                    agent = self.instance_to_agent[i.getFifeId()]
+                                    agent.take_damage(damage)
+                                    p.layer.deleteInstance(p._instance)
+                                    continue
+                            print "instances on projectile: ", [i.getObject().getId() for i in instances]
+
+                # Filter out dead projectiles
+                self.survivor.projectiles = [ i for i in self.survivor.projectiles if i.active ]
+
                 for zombie in self.zombies:
                     zombie.update()
+
                 # self.pump_ctr += 1
 
         def get_camera(self):

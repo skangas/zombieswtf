@@ -1,0 +1,3 @@
+<animation delay="100" namespace="PAPRG" id="lock_box_metal:opened:225" x_offset="-3" y_offset="-15">
+	<frame source="opened.png" />
+</animation>

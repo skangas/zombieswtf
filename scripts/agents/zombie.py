@@ -25,73 +25,96 @@ from math import hypot
 from time import time
 from random import *
 
-_STATE_NONE, _STATE_IDLE, _STATE_FOLLOW, _STATE_SPURIOUS = xrange(4)
+_STATE_NONE, _STATE_IDLE, _STATE_ROAM, _STATE_FOLLOW, _STATE_ATTACK, _STATE_DYING, _STATE_DEAD = xrange(7)
 
-ZOMBIE_SPEED = 1.6
-PROVOKE_RANGE = 5
+ZOMBIE_MOVEMENT_SPEED = 1.6
+ATTACK_RANGE = 1.5
+PROVOKE_RANGE = 8
 GIVE_UP_RANGE = 10
 MIN_IDLE_TIME_MS = 400
-MAX_IDLE_TIME_MS = 1000
+MAX_IDLE_TIME_MS = 1500
 
 class Zombie(Mob):
     def __init__(self, settings, model, agentName, layer, uniqInMap=True):
         super(Zombie, self).__init__(settings, model, agentName, layer, uniqInMap)
         self.state = _STATE_NONE
+        self.health = 1
         self.setIdleTimer()
 
     def aggro(self, player):
         self.hero = player.agent
+
+    def follow_hero(self):
+        self.state = _STATE_FOLLOW
+        self.agent.follow('walk', self.hero, ZOMBIE_MOVEMENT_SPEED)
 
     def setIdleTimer(self):
         self.idle_timer = time()
         self.idle_time = float(randint(MIN_IDLE_TIME_MS,MAX_IDLE_TIME_MS)) / 1000
 
     def onInstanceActionFinished(self, instance, action):
-        self.idle()
-
-    def start(self):
-        self.idle()
+        if action.getId() == 'die' or action.getId() == 'dead':
+            self.agent.act('dead', self.agent.getLocation(), False)
+            self.state = _STATE_DEAD
+        else:
+            self.idle()
 
     def idle(self):
         self.state = _STATE_IDLE
         self.agent.act('stand', self.agent.getFacingLocation(), False)
         self.setIdleTimer()
 
-    def follow_hero(self):
-        self.state = _STATE_FOLLOW
-        self.agent.follow('attack', self.hero, ZOMBIE_SPEED)
+    def is_dead(self):
+        return self.state == _STATE_DEAD or self.state == _STATE_DYING
 
-    def spurious(self):
-        #print 'spurios wakeup!'
-        self.state = _STATE_SPURIOUS
+    def roam(self):
+        self.state = _STATE_ROAM
         pos = self.agent.getLocation()
         cord = pos.getExactLayerCoordinates()
         cord.x += randint(-2,2)
         cord.y += randint(-2,2)
         pos.setExactLayerCoordinates(cord)
-        self.agent.move('attack', pos, ZOMBIE_SPEED)
+        self.agent.move('walk', pos, ZOMBIE_MOVEMENT_SPEED)
         pass
+
+    def start(self):
+        self.idle()
 
     ## to save some resources, this need not to be calculated every frame
     def update(self):
+        if self.state == _STATE_DYING or self.state == _STATE_DEAD:
+            return
+
+        if self.health <= 0:
+            self.state = _STATE_DYING
+            self.agent.act('die', self.agent.getFacingLocation(), False)
+            self.agent.setOverrideBlocking(True)
+            self.agent.setBlocking(False)
+            return
+
         mecord = self.agent.getLocation().getExactLayerCoordinates()
         herocord = self.hero.getLocation().getExactLayerCoordinates()
         dist = hypot(mecord.x - herocord.x, mecord.y - herocord.y)
-        # print 'distance to hero: {}'.format(dist)
         if dist > GIVE_UP_RANGE and self.state == _STATE_FOLLOW:
             self.idle()
             return
-        if dist < PROVOKE_RANGE and self.state != _STATE_FOLLOW:
-            self.follow_hero()
+        if dist <= ATTACK_RANGE:
+            if self.state != _STATE_ATTACK:
+                self.state = _STATE_ATTACK
+                self.agent.act('attack', self.hero.getLocation(), False)
+            return
+        elif dist < PROVOKE_RANGE:
+            if self.state != _STATE_FOLLOW:
+                self.follow_hero()
             return
 
-        if self.state == _STATE_SPURIOUS:
+        if self.state == _STATE_ROAM:
             return
 
         now = time()
         #print '{} to {}'.format(now - self.idle_timer,self.idle_time)
         if self.state == _STATE_IDLE and now - self.idle_timer > self.idle_time:
-            self.spurious()
+            self.roam()
 
 
 

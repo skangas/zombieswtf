@@ -35,11 +35,14 @@ class Mob(Agent):
         raise NotImplementedError
 
 def create_mob_agents(settings, model, objectName, layer, agentClass):
+    """Given an objectName (read: zombie), makes a Zombie object for each instance on the map.
+
+    Returns the list of objects"""
     agents = []
     instances = [a for a in layer.getInstances() if a.getObject().getId() == objectName]
     i = 0
     for a in instances:
-        agentName = '%s:i:%d' % (objectName, i)
+        agentName = '%s:%d' % (objectName, i)
         print 'agent created: ' + agentName
         i += 1
         agent = agentClass(settings, model, agentName, layer, False)

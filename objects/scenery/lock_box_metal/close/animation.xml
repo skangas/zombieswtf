@@ -1,0 +1,7 @@
+<animation delay="100" namespace="PAPRG" id="lock_box_metal:walk:225" x_offset="-3" y_offset="-15">
+	<frame source="lock_05.png" />
+	<frame source="lock_04.png" />
+	<frame source="lock_03.png" />
+	<frame source="lock_02.png" />
+	<frame source="lock_01.png" />
+</animation>

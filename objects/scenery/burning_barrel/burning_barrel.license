@@ -1,0 +1,18 @@
+Burning barrel objects:
+(c) 2010 PARPG development team, http://www.parpg.net
+
+Files:
+game/objects/scenery/burning_barrel/*.png
+game/objects/scenery/burning_barrel/burning_barrel.blend
+
+Attribution:
+KB1PKL >> *.png
+
+Licensed under:
+http://creativecommons.org/licenses/by-sa/3.0/
+
+Legal code:
+http://creativecommons.org/licenses/by-sa/3.0/legalcode
+
+Rust Material:
+http://matrep.parastudios.de/index.php?action=view&material=170-rust

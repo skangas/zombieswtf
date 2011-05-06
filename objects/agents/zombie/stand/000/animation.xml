@@ -1,0 +1,6 @@
+<animation delay="2000" namespace="zombieswtf" id="zombie_flare:stand:000" x_offset="0" y_offset="0" action="0">
+	<frame source="0000.png" />
+	<frame source="0001.png" />
+	<frame source="0002.png" />
+	<frame source="0003.png" />
+</animation>

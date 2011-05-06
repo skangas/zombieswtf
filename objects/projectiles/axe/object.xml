@@ -1,0 +1,13 @@
+<?fife type="object"?>
+<object id="axe" namespace="zombieswtf" blocking="1" static="0">
+    <action id="throw">
+        <animation source="000/animation.xml" direction="0" />
+        <animation source="045/animation.xml" direction="45" />
+        <animation source="090/animation.xml" direction="90" />
+        <animation source="135/animation.xml" direction="135" />
+        <animation source="180/animation.xml" direction="180" />
+        <animation source="225/animation.xml" direction="225" />
+        <animation source="270/animation.xml" direction="270" />
+        <animation source="315/animation.xml" direction="315" />
+    </action>
+</object>

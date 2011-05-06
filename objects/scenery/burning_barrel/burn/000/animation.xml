@@ -1,0 +1,25 @@
+<animation delay="50" namespace="PAPRG" id="burning_barrel:burn:000" x_offset="0" y_offset="-38">
+	<frame source="burning_barrel_0.png" />
+	<frame source="burning_barrel_1.png" />
+	<frame source="burning_barrel_2.png" />
+	<frame source="burning_barrel_3.png" />
+	<frame source="burning_barrel_4.png" />
+	<frame source="burning_barrel_5.png" />
+	<frame source="burning_barrel_6.png" />
+	<frame source="burning_barrel_7.png" />
+	<frame source="burning_barrel_8.png" />
+	<frame source="burning_barrel_7.png" />
+	<frame source="burning_barrel_6.png" />
+	<frame source="burning_barrel_5.png" />
+	<frame source="burning_barrel_4.png" />
+	<frame source="burning_barrel_7.png" />
+	<frame source="burning_barrel_8.png" />
+	<frame source="burning_barrel_6.png" />
+	<frame source="burning_barrel_3.png" />
+	<frame source="burning_barrel_5.png" />
+	<frame source="burning_barrel_4.png" />
+	<frame source="burning_barrel_3.png" />
+	<frame source="burning_barrel_2.png" />
+	<frame source="burning_barrel_1.png" />
+	<frame source="burning_barrel_0.png" />
+</animation>

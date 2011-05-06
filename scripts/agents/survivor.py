@@ -31,8 +31,11 @@ STAMINA = 10
 STAMINARECOVERY = 10
 
 class Survivor(Agent):
-    def __init__(self, settings, agentName, layer, uniqInMap=True):
+    def __init__(self, engine, settings, agentName, layer, uniqInMap=True):
         super(Survivor, self).__init__(settings, None, agentName, layer, uniqInMap)
+        self.engine      = engine
+        #self.agent.setOverrideBlocking(True)
+        #self.agent.setBlocking(False)
         self.state       = _STATE_NONE
         self.idlecounter = 1
         self.move_left   = False
@@ -44,12 +47,13 @@ class Survivor(Agent):
         self.sprint      = 5.0
         self.running     = 10.0
         self.walking     = 5.0
-        self.weapon      = Pistol(self)
+        self.weapon      = Axe(self)
+        self.projectiles = []
 
-        self._score = 0
-        self._lives = 3
+        self._score           = 0
+        self._lives           = 3
         self._staminarecovery = STAMINARECOVERY
-        self.recovery = 5.0
+        self.recovery         = 5.0
         self.init()
 
     def take_action(self, target):
@@ -57,7 +61,9 @@ class Survivor(Agent):
 
         if (self.weapon != None):
             my_loc = self.agent.getLocation().getMapCoordinates()
-            bullet = self.weapon.fire(my_loc, target)
+            bullet = self.weapon.fire_at(my_loc, target)
+            bullet.create(self.engine.getModel(), self.layer)
+            self.projectiles.append(bullet)
         
     def init(self):
         self._hitpoints = 10
@@ -99,40 +105,40 @@ class Survivor(Agent):
         self.state = _STATE_TALK
         self.agent.act('talk', target)
 
-    def run(self):
-        if self._stamina >= 0:
+    def run(self, running):
+        if self._stamina >= 0 and running:
+            print 'run'
             self.speed = self.running
         else:
             self.speed = self.walking
 
     def update(self):
-        now = time()
-        blocked = False
-
-        if not (self.move_left or self.move_right or self.move_up or self.move_down):
+        timediff = time() - self.last_update
+        self.last_update = time()
+        
+        actually_moving = (self.move_left ^ self.move_right or 
+                           self.move_up ^ self.move_down)
+        
+        if not actually_moving:
             self.idle()
-            self.last_update = now
             return
 
         if self.state != _STATE_RUN:
             self.state = _STATE_RUN
             self.agent.act('run', self.agent.getFacingLocation())
 
-        step = self.speed * (now - self.last_update)
+        step = self.speed * timediff
 
         if self.speed == self.running and not self._exhausted:
-            self._stamina -= self.sprint * (now - self.last_update)
-            self.run()
-            print 'run'
+            self._stamina -= self.sprint * timediff
         if self._stamina <= 0:
+            self.run(False)
             self._exhausted = True
-            self._staminarecovery -= self.recovery * (now - self.last_update)
-            print 'recovery'
+            self._staminarecovery -= self.recovery * timediff
         if self._staminarecovery <= 0:
             self._exhausted = False
             self._stamina = STAMINA
             self._staminarecovery = STAMINARECOVERY
-            print 'gogo'
 
         x = 0
         y = 0
@@ -149,8 +155,7 @@ class Survivor(Agent):
             x -= 1
             y += 1
         l = hypot(x,y)
-        if l == 0:
-            return
+        assert l != 0, "Was actually moving at speed 0; shouldn't happen."
         x /= l
         y /= l
         x *= step
@@ -167,12 +172,12 @@ class Survivor(Agent):
         cord.y -= y * 9
         pos.setExactLayerCoordinates(cord)
         
-        self.last_update = now
+        
 
         # Make sure the space is not blocked
         instances = self.agent.getLocationRef().getLayer().getInstancesAt(pos)
         for i in instances:
-            if i.getId() == 'PC':
+            if i.getId() == 'player':
                 continue
             if i.isBlocking():
                 print "BLOCK", i.getId()
