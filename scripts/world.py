@@ -90,7 +90,7 @@ class World(EventListenerBase):
                 Initialize agents.
                 """
                 self.agentlayer = self.map.getLayer('ObjectLayer')
-                self.survivor = Survivor(self.engine, TDS, 'player', self.agentlayer)
+                self.survivor = Survivor(self.engine, TDS, 'player', self.agentlayer, self)
                 self.instance_to_agent[self.survivor.agent.getFifeId()] = self.survivor
                 self.survivor.start()
                 
@@ -203,11 +203,15 @@ class World(EventListenerBase):
                 """
 
                 self.survivor.update()
+
                 for projectile in self.survivor.projectiles:
                     projectile.update()
 
+                self.survivor.projectiles = [ i for i in self.survivor.projectiles if i.active ]
+
                 for zombie in self.zombies:
                     zombie.update()
+
                 # self.pump_ctr += 1
 
         def get_camera(self):

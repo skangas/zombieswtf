@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ########################################################################
-# Copyright (C) 2011, Stefan Kangas
+# Copyright (C) 2011, Stefan Kangas, Dan Rosén
 ########################################################################
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,72 +19,20 @@
 from fife import fife
 from fife.fife import InstanceVisual
 from scripts.util import get_direction
+from scripts.projectile import *
 from time import time
-from math import cos,sin
-
-class Projectile():
-    def __init__(self, name, loc, direction, speed, ttl, owner):
-        self.loc         = loc
-        self.direction   = direction
-        self.speed       = speed
-        self.owner       = owner
-        self.started     = time()
-        self._name       = name
-        self.last_update = time()
-        self.ttl         = ttl
-
-    def create(self, model, layer):
-        self._obj = model.getObject(self._name, "zombieswtf")
-        inst = layer.createInstance(self._obj,
-                                    fife.ExactModelCoordinate(self.loc.x ,
-                                                              self.loc.y ),
-                                    "projectile")
-        InstanceVisual.create(inst)
-        self._instance = inst
-        self._instance.setOverrideBlocking(True)
-        self._instance.setBlocking(False)
-
-    def get_position():
-        pass
-    
-    def update(self):
-        
-        #if time() - self.started > self.ttl:
-            # how to remove an instance? 
-            #pass
-
-        # basically copy from survivor :(
-
-        timediff = time() - self.last_update
-        step = self.speed * timediff
-        self.last_update = time()
-
-        x = step * self.direction.x
-        y = step * self.direction.y
-
-        pos = self._instance.getLocation()
-        cord = pos.getExactLayerCoordinates()
-        cord.x += x * 10
-        cord.y += y * 10
-        pos.setExactLayerCoordinates(cord)
-        self._instance.setFacingLocation(pos)
-        
-        cord.x -= x * 9
-        cord.y -= y * 9
-        pos.setExactLayerCoordinates(cord)
-
-        self._instance.setLocation(pos)
 
 class Weapon(object):
-    def __init__(self, owner, speed, ttl):
+    def __init__(self, owner, speed, ttl, worldRef):
         self.owner = owner
         self.speed = speed
         self.ttl   = ttl
+        self.worldRef = worldRef
 
     def fire(self, origin, direction):
         direction.normalize()
         bullet = Projectile(self.get_bullet_name(), origin,
-                            direction, self.speed, self.ttl, self.owner)
+                            direction, self.speed, self.ttl, self.owner, self.worldRef)
         return bullet
 
     def fire_at(self, origin, target):
@@ -95,19 +43,19 @@ class Weapon(object):
         raise Exception("Programming Error: not implemented")
 
 class Axe(Weapon):
-    def __init__(self, owner):
+    def __init__(self, owner, worldRef):
         SPEED = 10.0
         TTL = 2.0 
-        super(Axe, self).__init__(owner, SPEED, TTL)
+        super(Axe, self).__init__(owner, SPEED, TTL, worldRef)
 
     def get_bullet_name(self):
         return 'axe'
 
 class Pistol(Weapon):
-    def __init__(self, owner):
+    def __init__(self, owner, worldRef):
         SPEED = 10.0
         TTL = 2.5
-        super(Pistol, self).__init__(owner, SPEED, TTL)
+        super(Pistol, self).__init__(owner, SPEED, TTL, worldRef)
 
     def get_bullet_name(self):
         return 'bullet'
