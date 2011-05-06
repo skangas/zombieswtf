@@ -1,5 +1,5 @@
 <?fife type="object"?>
-<object id="beekeeper" namespace="http://www.fifengine.de/xml/zombieswtf" blocking="1" static="0">
+<object id="beekeeper" namespace="zombieswtf" blocking="1" static="0">
 	<action id="stand">
 		<animation source="stand/000/animation.xml" direction="0" />
 		<animation source="stand/045/animation.xml" direction="45" />

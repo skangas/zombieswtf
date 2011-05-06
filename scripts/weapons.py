@@ -31,7 +31,7 @@ class Projectile():
         self._name = name
 
     def create(self, model, layer):
-        self._obj = model.getObject('bullet', "http://www.fifengine.de/xml/zombieswtf")
+        self._obj = model.getObject('bullet', "zombieswtf")
         assert self._obj
         # XXX: Why the hell do we multiply by 2???
         inst = layer.createInstance(self._obj,

@@ -1,5 +1,5 @@
 <?fife type="object"?>
-<object id="merchant" namespace="http://www.fifengine.de/xml/zombieswtf" blocking="1" static="0">
+<object id="merchant" namespace="zombieswtf" blocking="1" static="0">
 	<action id="pray">
 		<animation source="pray/000/animation.xml" direction="0" />
 		<animation source="pray/045/animation.xml" direction="45" />

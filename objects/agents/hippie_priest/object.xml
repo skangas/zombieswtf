@@ -1,5 +1,5 @@
 <?fife type="object"?>
-<object id="hippie_priest" namespace="http://www.fifengine.de/xml/zombieswtf" blocking="1" static="0">
+<object id="hippie_priest" namespace="zombieswtf" blocking="1" static="0">
 	<action id="attack">
 		<animation source="attack/000/animation.xml" direction="0" />
 		<animation source="attack/045/animation.xml" direction="45" />
