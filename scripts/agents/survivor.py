@@ -110,14 +110,13 @@ class Survivor(Agent):
             self.speed = self.walking
 
     def update(self):
-        now = time()
+        self.last_update = time()
         blocked = False
         
         actually_moving = self.move_left ^ self.move_right or self.move_up ^ self.move_down
         
         if not actually_moving:
             self.idle()
-            self.last_update = now
             return
 
         if self.state != _STATE_RUN:
@@ -172,7 +171,7 @@ class Survivor(Agent):
         cord.y -= y * 9
         pos.setExactLayerCoordinates(cord)
         
-        self.last_update = now
+        
 
         # Make sure the space is not blocked
         instances = self.agent.getLocationRef().getLayer().getInstancesAt(pos)
