@@ -88,6 +88,8 @@ class Zombie(Mob):
         if self.health <= 0:
             self.state = _STATE_DYING
             self.agent.act('die', self.agent.getFacingLocation(), False)
+            self.agent.setOverrideBlocking(True)
+            self.agent.setBlocking(False)
             return
 
         mecord = self.agent.getLocation().getExactLayerCoordinates()
