@@ -25,9 +25,10 @@ from math import hypot
 from time import time
 from random import *
 
-_STATE_NONE, _STATE_IDLE, _STATE_FOLLOW, _STATE_ROAM, _STATE_DYING, _STATE_DEAD = xrange(6)
+_STATE_NONE, _STATE_IDLE, _STATE_ROAM, _STATE_FOLLOW, _STATE_ATTACK, _STATE_DYING, _STATE_DEAD = xrange(7)
 
 ZOMBIE_MOVEMENT_SPEED = 1.6
+ATTACK_RANGE = 1.5
 PROVOKE_RANGE = 8
 GIVE_UP_RANGE = 10
 MIN_IDLE_TIME_MS = 400
@@ -66,7 +67,6 @@ class Zombie(Mob):
         return self.state == _STATE_DEAD or self.state == _STATE_DYING
 
     def roam(self):
-        #print 'spurios wakeup!'
         self.state = _STATE_ROAM
         pos = self.agent.getLocation()
         cord = pos.getExactLayerCoordinates()
@@ -84,7 +84,6 @@ class Zombie(Mob):
         if self.state == _STATE_DYING or self.state == _STATE_DEAD:
             return
 
-        print self.state
         if self.health <= 0:
             self.state = _STATE_DYING
             self.agent.act('die', self.agent.getFacingLocation(), False)
@@ -95,12 +94,17 @@ class Zombie(Mob):
         mecord = self.agent.getLocation().getExactLayerCoordinates()
         herocord = self.hero.getLocation().getExactLayerCoordinates()
         dist = hypot(mecord.x - herocord.x, mecord.y - herocord.y)
-        # print 'distance to hero: {}'.format(dist)
         if dist > GIVE_UP_RANGE and self.state == _STATE_FOLLOW:
             self.idle()
             return
-        if dist < PROVOKE_RANGE and self.state != _STATE_FOLLOW:
-            self.follow_hero()
+        if dist <= ATTACK_RANGE:
+            if self.state != _STATE_ATTACK:
+                self.state = _STATE_ATTACK
+                self.agent.act('attack', self.hero.getLocation(), False)
+            return
+        elif dist < PROVOKE_RANGE:
+            if self.state != _STATE_FOLLOW:
+                self.follow_hero()
             return
 
         if self.state == _STATE_ROAM:
