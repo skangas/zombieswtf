@@ -1,4 +1,4 @@
-<animation delay="100" namespace="PAPRG" id="player:run:090" x_offset="0" y_offset="-25">
+<animation delay="100" namespace="PAPRG" id="player:run:090" x_offset="0" y_offset="-15">
 	<frame source="run_0.png" />
 	<frame source="run_1.png" />
 	<frame source="run_2.png" />
