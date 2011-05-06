@@ -47,8 +47,8 @@ class Survivor(Agent):
         self.sprint      = 5.0
         self.running     = 10.0
         self.walking     = 5.0
-        self.weapon      = Pistol(self)
-        self.bullets     = []
+        self.weapon      = Axe(self)
+        self.projectiles = []
 
         self._score           = 0
         self._lives           = 3
@@ -63,7 +63,7 @@ class Survivor(Agent):
             my_loc = self.agent.getLocation().getMapCoordinates()
             bullet = self.weapon.fire(my_loc, target)
             bullet.create(self.engine.getModel(), self.layer)
-            self.bullets.append(bullet)
+            self.projectiles.append(bullet)
         
     def init(self):
         self._hitpoints = 10

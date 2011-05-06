@@ -203,6 +203,9 @@ class World(EventListenerBase):
                 """
 
                 self.survivor.update()
+                for projectile in self.survivor.projectiles:
+                    projectile.update()
+
                 for zombie in self.zombies:
                     zombie.update()
                 # self.pump_ctr += 1

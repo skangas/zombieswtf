@@ -23,6 +23,7 @@
 	<import file="../objects/scenery/barrel/barrel_03.xml"></import>
 	<import file="../objects/scenery/volvo_car/yellow/smashed/yellow_volvo_smashed.xml"></import>
 	<import file="../objects/buildings/container_house/container_house_01.xml"></import>
+	<import file="../objects/projectiles/axe/object.xml"></import>
 	<layer rotation="0.0" id="SnowLayer" grid_type="square" pathing="cell_edges_only" y_offset="0.0" transparency="0" y_scale="1.0" x_offset="0.0" x_scale="1.0">
 		<instances>
 			<i ns="zombieswtf" y="-20.0" r="0" x="-20.0" z="0.0" stackpos="0" o="snow02"></i>

@@ -18,32 +18,62 @@
 
 from fife import fife
 from fife.fife import InstanceVisual
-from scripts.util import get_angle
+from scripts.util import get_direction
 from time import time
+from math import cos,sin
 
 class Projectile():
-    def __init__(self, name, loc, angle, speed, ttl, owner):
-        self.loc     = loc
-        self.angle   = angle
-        self.speed   = speed
-        self.owner   = owner
-        self.started = time()
-        self._name = name
+    def __init__(self, name, loc, direction, speed, ttl, owner):
+        self.loc         = loc
+        self.direction   = direction
+        self.speed       = speed
+        self.owner       = owner
+        self.started     = time()
+        self._name       = name
+        self.last_update = time()
+        self.ttl         = ttl
 
     def create(self, model, layer):
-        self._obj = model.getObject('bullet', "zombieswtf")
-        assert self._obj
-        # XXX: Why the hell do we multiply by 2???
+        self._obj = model.getObject(self._name, "zombieswtf")
         inst = layer.createInstance(self._obj,
-                                    fife.ExactModelCoordinate(self.loc.x * 2,
-                                                              self.loc.y * 2),
-                                    "bullet")
-        assert inst
+                                    fife.ExactModelCoordinate(self.loc.x ,
+                                                              self.loc.y ),
+                                    "projectile")
         InstanceVisual.create(inst)
         self._instance = inst
+        self._instance.setOverrideBlocking(True)
+        self._instance.setBlocking(False)
 
     def get_position():
         pass
+    
+    def update(self):
+        
+        #if time() - self.started > self.ttl:
+            # how to remove an instance? 
+            #pass
+
+        # basically copy from survivor :(
+
+        timediff = time() - self.last_update
+        step = self.speed * timediff
+        self.last_update = time()
+
+        x = step * self.direction.x
+        y = step * self.direction.y
+
+        pos = self._instance.getLocation()
+        cord = pos.getExactLayerCoordinates()
+        cord.x += x * 10
+        cord.y += y * 10
+        pos.setExactLayerCoordinates(cord)
+        self._instance.setFacingLocation(pos)
+        
+        cord.x -= x * 9
+        cord.y -= y * 9
+        pos.setExactLayerCoordinates(cord)
+
+        self._instance.setLocation(pos)
 
 class Weapon(object):
     def __init__(self, owner, speed, ttl):
@@ -51,17 +81,27 @@ class Weapon(object):
         self.speed = speed
         self.ttl   = ttl
 
-    def fire(self, origin, angle):
+    def fire(self, origin, direction):
+        direction.normalize()
         bullet = Projectile(self.get_bullet_name(), origin,
-                            angle, self.speed, self.ttl, self.owner)
+                            direction, self.speed, self.ttl, self.owner)
         return bullet
 
     def fire_at(self, origin, target):
-        angle = get_angle(origin, target)
-        fire(origin, angle)
+        direction = get_direction(origin, target)
+        fire(origin, direction)
 
     def get_bullet_name(self):
         raise Exception("Programming Error: not implemented")
+
+class Axe(Weapon):
+    def __init__(self, owner):
+        SPEED = 10.0
+        TTL = 2.0 
+        super(Axe, self).__init__(owner, SPEED, TTL)
+
+    def get_bullet_name(self):
+        return 'axe'
 
 class Pistol(Weapon):
     def __init__(self, owner):
