@@ -31,7 +31,7 @@ ZOMBIE_MOVEMENT_SPEED = 1.6
 PROVOKE_RANGE = 5
 GIVE_UP_RANGE = 10
 MIN_IDLE_TIME_MS = 400
-MAX_IDLE_TIME_MS = 1000
+MAX_IDLE_TIME_MS = 1500
 
 class Zombie(Mob):
     def __init__(self, settings, model, agentName, layer, uniqInMap=True):
@@ -44,7 +44,7 @@ class Zombie(Mob):
 
     def follow_hero(self):
         self.state = _STATE_FOLLOW
-        self.agent.follow('attack', self.hero, ZOMBIE_MOVEMENT_SPEED)
+        self.agent.follow('walk', self.hero, ZOMBIE_MOVEMENT_SPEED)
 
     def setIdleTimer(self):
         self.idle_timer = time()
@@ -73,7 +73,7 @@ class Zombie(Mob):
         cord.x += randint(-2,2)
         cord.y += randint(-2,2)
         pos.setExactLayerCoordinates(cord)
-        self.agent.move('attack', pos, ZOMBIE_MOVEMENT_SPEED)
+        self.agent.move('walk', pos, ZOMBIE_MOVEMENT_SPEED)
         pass
 
     def start(self):
