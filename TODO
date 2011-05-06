@@ -9,7 +9,7 @@ http://www.jamendo.com/en/album/35032 -- track 1 for main menu?
 http://opengameart.org/content/chaingun-pistol-rifle-shotgun-shots
 
 * Graphics
-** Cursor (corshair?)
+** Cursor (crosshair?)
 ** Floor tiles
 ** Buildings
 ** Debree
@@ -31,11 +31,12 @@ http://opengameart.org/content/chaingun-pistol-rifle-shotgun-shots
     - weapon/ammo
     - stamina
 ** Fireing bullets from the player
-** Implement more weapons (e.g. shotgun, rocket launcher)
+** Implement more weapons (e.g. shotgun, rocket launcher, 
+                           throw axes, boomerang, melee: pitchfork, spades etc)
 ** Using the mouse pointer to aim
 ** Health and other attributes for players (and mobs)
 ** Line of sight of player
-** Not look through buildings
+** Not look through buildings (do we necessarily want this ?)
 ** Minimap
 ** Pickups (health/ammo/etc)
 ** Line of sight of mobs, not follow player when he is hidden
@@ -55,3 +56,4 @@ http://opengameart.org/content/chaingun-pistol-rifle-shotgun-shots
 
 * Future plans/crazy ideas
 ** RTS stuff??
+*** Build provisional towers, fences/walls and place mines
