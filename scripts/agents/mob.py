@@ -34,9 +34,6 @@ class Mob(Agent):
     def start(self):
         raise NotImplementedError
 
-    def take_damage(self, amount):
-        self.health -= amount
-
 def create_mob_agents(settings, model, objectName, layer, agentClass):
     """Given an objectName (read: zombie), makes a Zombie object for each instance on the map.
 

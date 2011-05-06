@@ -29,8 +29,14 @@ class Agent(fife.InstanceActionListener):
             self.agent = layer.getInstance(agentName)
             self.agent.addActionListener(self)
 
+        self.max_health = 100
+        self.health     = 0
+
     def onInstanceActionFinished(self, instance, action):
         raise Exception('No OnActionFinished defined for Agent')
 
     def start(self):
         raise Exception('No start defined for Agent')
+
+    def take_damage(self, amount):
+        self.health -= amount
