@@ -25,9 +25,9 @@ from math import hypot
 from time import time
 from random import *
 
-_STATE_NONE, _STATE_IDLE, _STATE_FOLLOW, _STATE_ROAM = xrange(4)
+_STATE_NONE, _STATE_IDLE, _STATE_FOLLOW, _STATE_ROAM, _STATE_DYING, _STATE_DEAD = xrange(6)
 
-ZOMBIE_SPEED = 1.6
+ZOMBIE_MOVEMENT_SPEED = 1.6
 PROVOKE_RANGE = 5
 GIVE_UP_RANGE = 10
 MIN_IDLE_TIME_MS = 400
@@ -42,24 +42,28 @@ class Zombie(Mob):
     def aggro(self, player):
         self.hero = player.agent
 
+    def follow_hero(self):
+        self.state = _STATE_FOLLOW
+        self.agent.follow('attack', self.hero, ZOMBIE_MOVEMENT_SPEED)
+
     def setIdleTimer(self):
         self.idle_timer = time()
         self.idle_time = float(randint(MIN_IDLE_TIME_MS,MAX_IDLE_TIME_MS)) / 1000
 
     def onInstanceActionFinished(self, instance, action):
-        self.idle()
-
-    def start(self):
-        self.idle()
+        if action.getId() == 'die' or action.getId() == 'dead':
+            self.agent.act('dead', self.agent.getLocation(), False)
+            self.state = _STATE_DEAD
+        else:
+            self.idle()
 
     def idle(self):
         self.state = _STATE_IDLE
         self.agent.act('stand', self.agent.getFacingLocation(), False)
         self.setIdleTimer()
 
-    def follow_hero(self):
-        self.state = _STATE_FOLLOW
-        self.agent.follow('attack', self.hero, ZOMBIE_SPEED)
+    def is_dead(self):
+        return self.state == _STATE_DEAD or self.state == _STATE_DYING
 
     def roam(self):
         #print 'spurios wakeup!'
@@ -69,12 +73,22 @@ class Zombie(Mob):
         cord.x += randint(-2,2)
         cord.y += randint(-2,2)
         pos.setExactLayerCoordinates(cord)
-        self.agent.move('attack', pos, ZOMBIE_SPEED)
+        self.agent.move('attack', pos, ZOMBIE_MOVEMENT_SPEED)
         pass
+
+    def start(self):
+        self.idle()
 
     ## to save some resources, this need not to be calculated every frame
     def update(self):
-        
+        if self.state == _STATE_DYING or self.state == _STATE_DEAD:
+            return
+
+        print self.state
+        if self.health <= 0:
+            self.state = _STATE_DYING
+            self.agent.act('die', self.agent.getFacingLocation(), False)
+            return
 
         mecord = self.agent.getLocation().getExactLayerCoordinates()
         herocord = self.hero.getLocation().getExactLayerCoordinates()

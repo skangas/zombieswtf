@@ -34,6 +34,9 @@ class Mob(Agent):
     def start(self):
         raise NotImplementedError
 
+    def take_damage(self, amount):
+        self.health -= amount
+
 def create_mob_agents(settings, model, objectName, layer, agentClass):
     agents = []
     instances = [a for a in layer.getInstances() if a.getObject().getId() == objectName]

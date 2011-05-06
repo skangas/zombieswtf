@@ -31,10 +31,8 @@ class Projectile():
         self._name = name
 
     def create(self, model, layer):
-        print self.loc.x, self.loc.y
         self._obj = model.getObject('bullet', "http://www.fifengine.de/xml/zombieswtf")
         assert self._obj
-        print layer
         # XXX: Why the hell do we multiply by 2???
         inst = layer.createInstance(self._obj,
                                     fife.ExactModelCoordinate(self.loc.x * 2,
