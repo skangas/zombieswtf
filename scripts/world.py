@@ -70,7 +70,7 @@ class World(EventListenerBase):
                 # self.light_intensity = 1
                 # self.light_sources = 0
 
-                self.load('new-maps/snow.xml')
+                self.load('maps/snow.xml')
 
                 self.controller = Controller(self.engine, self.survivor, self)
 
