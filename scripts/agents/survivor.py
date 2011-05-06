@@ -31,7 +31,7 @@ STAMINA = 10
 STAMINARECOVERY = 10
 
 class Survivor(Agent):
-    def __init__(self, engine, settings, agentName, layer, worldRef, uniqInMap=True):
+    def __init__(self, engine, settings, agentName, layer, uniqInMap=True):
         super(Survivor, self).__init__(settings, None, agentName, layer, uniqInMap)
         self.engine      = engine
         #self.agent.setOverrideBlocking(True)
@@ -47,7 +47,7 @@ class Survivor(Agent):
         self.sprint      = 5.0
         self.running     = 10.0
         self.walking     = 5.0
-        self.weapon      = Axe(self,worldRef)
+        self.weapon      = Axe(self)
         self.projectiles = []
 
         self._score           = 0

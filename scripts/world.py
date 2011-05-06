@@ -90,7 +90,7 @@ class World(EventListenerBase):
                 Initialize agents.
                 """
                 self.agentlayer = self.map.getLayer('ObjectLayer')
-                self.survivor = Survivor(self.engine, TDS, 'player', self.agentlayer, self)
+                self.survivor = Survivor(self.engine, TDS, 'player', self.agentlayer)
                 self.instance_to_agent[self.survivor.agent.getFifeId()] = self.survivor
                 self.survivor.start()
                 
@@ -204,9 +204,26 @@ class World(EventListenerBase):
 
                 self.survivor.update()
 
-                for projectile in self.survivor.projectiles:
-                    projectile.update()
+                for p in self.survivor.projectiles:
+                    p.update()
 
+                    if not p.active:
+                            continue
+
+                    pos = p.get_position()
+                    instances = p.layer.getInstancesAt(pos,False)
+                    for i in instances:
+                            # TODO: depending on object type, keep track of our own collision box,
+                            # and check if we are colliding
+                            if i.getObject().getId() == "zombie" and i.isBlocking():
+                                    damage = p.hit()
+                                    agent = self.instance_to_agent[i.getFifeId()]
+                                    agent.take_damage(damage)
+                                    p.layer.deleteInstance(p._instance)
+                                    continue
+                            print "instances on projectile: ", [i.getObject().getId() for i in instances]
+
+                # Filter out dead projectiles
                 self.survivor.projectiles = [ i for i in self.survivor.projectiles if i.active ]
 
                 for zombie in self.zombies:

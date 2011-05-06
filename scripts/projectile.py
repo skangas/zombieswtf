@@ -23,7 +23,7 @@ from scripts.util import get_direction
 from time import time
 
 class Projectile():
-    def __init__(self, name, loc, direction, speed, ttl, damage, owner, worldRef):
+    def __init__(self, name, loc, direction, speed, ttl, damage, owner):
         self._name       = name
         self.loc         = loc
         self.direction   = direction
@@ -31,12 +31,12 @@ class Projectile():
         self.ttl         = ttl
         self.damage      = damage
         self.owner       = owner
-        self.worldRef    = worldRef
 
-        self.started     = time()
-        self.last_update = time()
+        self.active      = False
 
-        self.active      = True
+        self._started     = time()
+        self._last_update = time()
+        self._instance   = None
 
     def create(self, model, layer):
         self.layer = layer
@@ -49,26 +49,26 @@ class Projectile():
         self._instance = inst
         self._instance.setOverrideBlocking(True)
         self._instance.setBlocking(False)
+        self.active = True
 
-    def get_position():
-        pass
+    def get_position(self):
+        assert self._instance
+        return self._instance.getLocation()
 
-    def remove(self):
+    def hit(self):
         self.active = False
-        self.layer.deleteInstance(self._instance)
+        return self.damage
 
-    
     def update(self):
         
-        if not self.active or time() - self.started > self.ttl:
-            self.remove()
+        if not self.active or time() - self._started > self.ttl:
             return
 
         # basically copy from survivor :(
 
-        timediff = time() - self.last_update
+        timediff = time() - self._last_update
         step = self.speed * timediff
-        self.last_update = time()
+        self._last_update = time()
 
         x = step * self.direction.x
         y = step * self.direction.y
@@ -84,16 +84,4 @@ class Projectile():
         cord.y -= y * 9
         pos.setExactLayerCoordinates(cord)
 
-        instances = self.layer.getInstancesAt(pos,False)
-        for i in instances:
-            if i.getObject().getId() == "zombie":
-                self.worldRef.instance_to_agent[i.getFifeId()].health = 0
-                self.active = False
-                print "hit!"
-                self.remove()
-                return
-
-        print "instances on projectile: ", [i.getObject().getId() for i in instances]
-
         self._instance.setLocation(pos)
-
