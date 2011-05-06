@@ -110,29 +110,29 @@ class Survivor(Agent):
             self.speed = self.walking
 
     def update(self):
-        now = time()
-        blocked = False
+        timediff = time() - self.last_update
+        self.last_update = time()
         
-        actually_moving = self.move_left ^ self.move_right or self.move_up ^ self.move_down
+        actually_moving = (self.move_left ^ self.move_right or 
+                           self.move_up ^ self.move_down)
         
         if not actually_moving:
             self.idle()
-            self.last_update = now
             return
 
         if self.state != _STATE_RUN:
             self.state = _STATE_RUN
             self.agent.act('run', self.agent.getFacingLocation())
 
-        step = self.speed * (now - self.last_update)
+        step = self.speed * timediff
 
         if self.speed == self.running and not self._exhausted:
-            self._stamina -= self.sprint * (now - self.last_update)
+            self._stamina -= self.sprint * timediff
             self.run()
             print 'run'
         if self._stamina <= 0:
             self._exhausted = True
-            self._staminarecovery -= self.recovery * (now - self.last_update)
+            self._staminarecovery -= self.recovery * timediff
             print 'recovery'
         if self._staminarecovery <= 0:
             self._exhausted = False
@@ -155,8 +155,7 @@ class Survivor(Agent):
             x -= 1
             y += 1
         l = hypot(x,y)
-        if l == 0:
-            return
+        assert l != 0, "Was actually moving at speed 0; shouldn't happen."
         x /= l
         y /= l
         x *= step
@@ -173,7 +172,7 @@ class Survivor(Agent):
         cord.y -= y * 9
         pos.setExactLayerCoordinates(cord)
         
-        self.last_update = now
+        
 
         # Make sure the space is not blocked
         instances = self.agent.getLocationRef().getLayer().getInstancesAt(pos)
