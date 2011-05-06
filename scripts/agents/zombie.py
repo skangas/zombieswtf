@@ -25,7 +25,7 @@ from math import hypot
 from time import time
 from random import *
 
-_STATE_NONE, _STATE_IDLE, _STATE_FOLLOW, _STATE_SPURIOUS = xrange(4)
+_STATE_NONE, _STATE_IDLE, _STATE_FOLLOW, _STATE_ROAM = xrange(4)
 
 ZOMBIE_SPEED = 1.6
 PROVOKE_RANGE = 5
@@ -61,9 +61,9 @@ class Zombie(Mob):
         self.state = _STATE_FOLLOW
         self.agent.follow('attack', self.hero, ZOMBIE_SPEED)
 
-    def spurious(self):
+    def roam(self):
         #print 'spurios wakeup!'
-        self.state = _STATE_SPURIOUS
+        self.state = _STATE_ROAM
         pos = self.agent.getLocation()
         cord = pos.getExactLayerCoordinates()
         cord.x += randint(-2,2)
@@ -74,6 +74,8 @@ class Zombie(Mob):
 
     ## to save some resources, this need not to be calculated every frame
     def update(self):
+        
+
         mecord = self.agent.getLocation().getExactLayerCoordinates()
         herocord = self.hero.getLocation().getExactLayerCoordinates()
         dist = hypot(mecord.x - herocord.x, mecord.y - herocord.y)
@@ -85,13 +87,13 @@ class Zombie(Mob):
             self.follow_hero()
             return
 
-        if self.state == _STATE_SPURIOUS:
+        if self.state == _STATE_ROAM:
             return
 
         now = time()
         #print '{} to {}'.format(now - self.idle_timer,self.idle_time)
         if self.state == _STATE_IDLE and now - self.idle_timer > self.idle_time:
-            self.spurious()
+            self.roam()
 
 
 

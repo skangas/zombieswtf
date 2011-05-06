@@ -16,17 +16,33 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ########################################################################
 
+from fife import fife
+from fife.fife import InstanceVisual
 from scripts.util import get_angle
 from time import time
 
 class Projectile():
-    def __init__(self, x, y, angle, speed, ttl, owner):
-        self.x       = x
-        self.y       = y
+    def __init__(self, name, loc, angle, speed, ttl, owner):
+        self.loc     = loc
         self.angle   = angle
         self.speed   = speed
         self.owner   = owner
         self.started = time()
+        self._name = name
+
+    def create(self, model, layer):
+        print self.loc.x, self.loc.y
+        self._obj = model.getObject('bullet', "http://www.fifengine.de/xml/zombieswtf")
+        assert self._obj
+        print layer
+        # XXX: Why the hell do we multiply by 2???
+        inst = layer.createInstance(self._obj,
+                                    fife.ExactModelCoordinate(self.loc.x * 2,
+                                                              self.loc.y * 2),
+                                    "bullet")
+        assert inst
+        InstanceVisual.create(inst)
+        self._instance = inst
 
     def get_position():
         pass
@@ -38,17 +54,22 @@ class Weapon(object):
         self.ttl   = ttl
 
     def fire(self, origin, angle):
-        bullet = Projectile(origin.x, origin.y, angle, self.speed, self.ttl, self.owner)
+        bullet = Projectile(self.get_bullet_name(), origin,
+                            angle, self.speed, self.ttl, self.owner)
         return bullet
 
     def fire_at(self, origin, target):
         angle = get_angle(origin, target)
         fire(origin, angle)
 
-class Pistol(Weapon):
+    def get_bullet_name(self):
+        raise Exception("Programming Error: not implemented")
 
+class Pistol(Weapon):
     def __init__(self, owner):
         SPEED = 10.0
         TTL = 2.5
         super(Pistol, self).__init__(owner, SPEED, TTL)
 
+    def get_bullet_name(self):
+        return 'bullet'
