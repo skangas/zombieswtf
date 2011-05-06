@@ -105,8 +105,9 @@ class Survivor(Agent):
         self.state = _STATE_TALK
         self.agent.act('talk', target)
 
-    def run(self):
-        if self._stamina >= 0:
+    def run(self, running):
+        if self._stamina >= 0 and running:
+            print 'run'
             self.speed = self.running
         else:
             self.speed = self.walking
@@ -130,17 +131,14 @@ class Survivor(Agent):
 
         if self.speed == self.running and not self._exhausted:
             self._stamina -= self.sprint * timediff
-            self.run()
-            print 'run'
         if self._stamina <= 0:
+            self.run(False)
             self._exhausted = True
             self._staminarecovery -= self.recovery * timediff
-            print 'recovery'
         if self._staminarecovery <= 0:
             self._exhausted = False
             self._stamina = STAMINA
             self._staminarecovery = STAMINARECOVERY
-            print 'gogo'
 
         x = 0
         y = 0

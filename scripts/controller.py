@@ -66,7 +66,8 @@ class Controller(EventListenerBase):
         elif keyval == self.keybindings['move_up']:
             self.survivor.move_up    = True
         elif keyval == self.keybindings['run']:
-            self.survivor.run()
+            self.survivor.run(True)
+            print evt.getName()
 
         # debug keys
         elif keystr == 't':
@@ -90,6 +91,8 @@ class Controller(EventListenerBase):
             self.survivor.move_down  = False
         elif keyval == self.keybindings['move_up']:
             self.survivor.move_up    = False
+        elif keyval == self.keybindings['run']:
+            self.survivor.run(False)
 
     def mousePressed(self, evt):
         if evt.isConsumedByWidgets():
