@@ -155,8 +155,7 @@ class Survivor(Agent):
             x -= 1
             y += 1
         l = hypot(x,y)
-        if l == 0:
-            return
+        assert l != 0, "Was actually moving at speed 0; shouldn't happen."
         x /= l
         y /= l
         x *= step
