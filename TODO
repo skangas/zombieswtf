@@ -2,6 +2,9 @@
 #+TITLE: Todo-list
 #+STARTUP: indent
 
+http://www.blendswap.com/?license=ccby
+http://opengameart.org/
+
 * Music
 http://www.jamendo.com/en/album/35032 -- track 1 for main menu?
 * Sounds
@@ -23,13 +26,14 @@ http://opengameart.org/content/chaingun-pistol-rifle-shotgun-shots
 ** Maps
 
 * Programming
+** Add qwerty-keybindings
 ** GUI
 *** Remove useless buttons on top
 *** Add menu when hitting escape
 *** Begin creating a HUD
-    - health
-    - weapon/ammo
-    - stamina
+- health
+- weapon/ammo
+- stamina
 ** Fireing bullets from the player
 ** Implement more weapons (e.g. shotgun, rocket launcher, 
                            throw axes, boomerang, melee: pitchfork, spades etc)
