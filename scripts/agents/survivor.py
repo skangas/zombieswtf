@@ -171,8 +171,6 @@ class Survivor(Agent):
         cord.x -= x * 9
         cord.y -= y * 9
         pos.setExactLayerCoordinates(cord)
-        
-        
 
         # Make sure the space is not blocked
         instances = self.agent.getLocationRef().getLayer().getInstancesAt(pos)
@@ -180,7 +178,6 @@ class Survivor(Agent):
             if i.getId() == 'player':
                 continue
             if i.isBlocking():
-                print "BLOCK", i.getId()
                 return
 
         self.agent.setLocation(pos)
