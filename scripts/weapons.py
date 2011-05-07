@@ -29,11 +29,16 @@ class Weapon(object):
         self.ttl   = ttl
         self.damage = damage
 
+        self._last_shot = 0
+
     def fire(self, origin, direction):
-        direction.normalize()
-        return Projectile(self.get_bullet_name(), origin, direction,
-                          self.speed, self.ttl, self.damage,
-                          self.owner)
+        now = time()
+        if time() - self._last_shot > self.get_delay():
+            direction.normalize()
+            self._last_shot = now
+            return Projectile(self.get_bullet_name(), origin, direction,
+                              self.speed, self.ttl, self.damage,
+                              self.owner)
 
     def fire_at(self, origin, target):
         direction = get_direction(origin, target)
@@ -51,6 +56,9 @@ class Axe(Weapon):
 
     def get_bullet_name(self):
         return 'axe'
+
+    def get_delay(self):
+        return 0.75
 
 class Pistol(Weapon):
     def __init__(self, owner):
