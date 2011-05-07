@@ -57,7 +57,6 @@ class Projectile():
 
     def hit(self):
         self.active = False
-        return self.damage
 
     def update(self):
         

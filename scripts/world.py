@@ -209,18 +209,21 @@ class World(EventListenerBase):
                     if not p.active:
                             continue
 
+                    # Collision detection for projectiles
                     pos = p.get_position()
                     instances = p.layer.getInstancesAt(pos,False)
                     for i in instances:
-                            # TODO: depending on object type, keep track of our own collision box,
-                            # and check if we are colliding
-                            if i.getObject().getId() == "zombie" and i.isBlocking():
-                                    damage = p.hit()
-                                    agent = self.instance_to_agent[i.getFifeId()]
-                                    agent.take_damage(damage)
-                                    p.layer.deleteInstance(p._instance)
+                            if i.getObject().getId() in ('axe','player'):
                                     continue
-                            print "instances on projectile: ", [i.getObject().getId() for i in instances]
+
+                            if i.isBlocking():
+                                    p.hit()
+                                    # TODO: depending on object type, keep track of our own collision box,
+                                    # and check if we are colliding
+                                    if i.getObject().getId() in ('zombie'):
+                                            a  = self.instance_to_agent[i.getFifeId()]
+                                            a.take_damage(p.damage)
+                                    p.layer.deleteInstance(p._instance)
 
                 # Filter out dead projectiles
                 self.survivor.projectiles = [ i for i in self.survivor.projectiles if i.active ]
