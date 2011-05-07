@@ -32,7 +32,8 @@ class Projectile():
         self.damage      = damage
         self.owner       = owner
 
-        self.active      = False
+        self.created      = False
+        self.has_hit      = False
 
         self._started     = time()
         self._last_update = time()
@@ -49,18 +50,20 @@ class Projectile():
         self._instance = inst
         self._instance.setOverrideBlocking(True)
         self._instance.setBlocking(False)
-        self.active = True
+        self.created = True
 
     def get_position(self):
         assert self._instance
         return self._instance.getLocation()
 
-    def hit(self):
-        self.active = False
-
     def update(self):
-        
-        if not self.active or time() - self._started > self.ttl:
+        if not self.created:
+            return
+
+        if time() - self._started > self.ttl:
+            self.has_hit = True
+
+        if self.has_hit:
             return
 
         # basically copy from survivor :(

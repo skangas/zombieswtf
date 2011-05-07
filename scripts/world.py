@@ -204,10 +204,15 @@ class World(EventListenerBase):
                 self.survivor.update()
 
                 for p in self.survivor.projectiles:
-                    p.update()
-
-                    if not p.active:
+                    if not p.created:
                             continue
+
+                    if p.has_hit:
+                            p.layer.deleteInstance(p._instance)
+                            p.created = False
+                            continue
+
+                    p.update()
 
                     # Collision detection for projectiles
                     pos = p.get_position()
@@ -217,16 +222,16 @@ class World(EventListenerBase):
                                     continue
 
                             if i.isBlocking():
-                                    p.hit()
-                                    # TODO: depending on object type, keep track of our own collision box,
-                                    # and check if we are colliding
+                                    p.has_hit = True
+                                    # TODO: implement our own collison box, such
+                                    # that we can specify a more fine-grained
+                                    # collision detection than what FIFEs engine
+                                    # allows
                                     if i.getObject().getId() in ('zombie'):
                                             a  = self.instance_to_agent[i.getFifeId()]
                                             a.take_damage(p.damage)
-                                    p.layer.deleteInstance(p._instance)
-
-                # Filter out dead projectiles
-                self.survivor.projectiles = [ i for i in self.survivor.projectiles if i.active ]
+                                    
+                # self.survivor.projectiles = [ p for p in self.survivor.projectiles if not p.has_hit ]
 
                 for zombie in self.zombies:
                     zombie.update()
