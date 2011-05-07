@@ -28,8 +28,7 @@ from agents.survivor import Survivor
 from fife.extensions.fife_settings import Setting
 from controller import Controller
 
-from scripts.agents.mob import create_mob_agents
-from scripts.agents.zombie import Zombie
+from scripts.agents.mob import *
 
 TDS = Setting(app_name="zombieswtf")
 
