@@ -22,13 +22,11 @@ from scripts.util import get_direction
 from scripts.projectile import *
 from time import time
 
-class Weapon(object):
-    def __init__(self, owner, speed, ttl, damage):
-        self.owner = owner
-        self.speed = speed
-        self.ttl   = ttl
-        self.damage = damage
+_WEAPON_RANGED, _WEAPON_MELEE = xrange(2)
 
+class Weapon(object):
+    def __init__(self, owner):
+        self.owner = owner
         self._last_shot = 0
 
     def fire(self, origin, direction):
@@ -36,35 +34,32 @@ class Weapon(object):
         if time() - self._last_shot > self.get_delay():
             direction.normalize()
             self._last_shot = now
-            return Projectile(self.get_bullet_name(), origin, direction,
-                              self.speed, self.ttl, self.damage,
+            return Projectile(self.PROJECTILE, origin, direction,
+                              self.SPEED, self.TTL, self.DAMAGE,
                               self.owner)
 
     def fire_at(self, origin, target):
         direction = get_direction(origin, target)
         return self.fire(origin, direction)
 
-    def get_bullet_name(self):
-        raise Exception("Programming Error: not implemented")
-
 class Axe(Weapon):
+    ATTACK_RATE = 0.75
+    DAMAGE      = 5.0
+    PROJECTILE  = 'axe'
+    SPEED       = 10.0
+    TTL         = 2.0
+    TYPE        = _WEAPON_RANGED
+
     def __init__(self, owner):
-        SPEED  = 10.0
-        TTL    = 2.0
-        DAMAGE = 5.0
-        super(Axe, self).__init__(owner, SPEED, TTL, DAMAGE)
-
-    def get_bullet_name(self):
-        return 'axe'
-
-    def get_delay(self):
-        return 0.75
+        super(Axe, self).__init__(owner)
 
 class Pistol(Weapon):
-    def __init__(self, owner):
-        SPEED = 10.0
-        TTL = 2.5
-        super(Pistol, self).__init__(owner, SPEED, TTL)
+    ATTACK_RATE = 0.2
+    DAMAGE      = 1.0
+    PROJECTILE  = 'bullet'
+    SPEED       = 10.0
+    TTL         = 2.5
+    TYPE        = _WEAPON_RANGED
 
-    def get_bullet_name(self):
-        return 'bullet'
+    def __init__(self, owner):
+        super(Pistol, self).__init__(owner)
