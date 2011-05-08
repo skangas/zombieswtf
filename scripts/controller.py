@@ -33,9 +33,11 @@ class Controller(EventListenerBase):
         # self.eventmanager = engine.getEventManager()
         super(Controller, self).__init__(engine, regMouse=True, regKeys=True)
 
-        self.keybindings = {'move_left': fife.Key.A,'move_right':  fife.Key.E, 
-                            'move_down':  fife.Key.O, 'move_up':  fife.Key.COMMA,
-                            'run': fife.Key.LEFT_SHIFT}
+        self.keybindings = {'move_left':  [fife.Key.A],
+                            'move_right': [fife.Key.E, fife.Key.D],
+                            'move_down':  [fife.Key.O, fife.Key.S],
+                            'move_up':    [fife.Key.COMMA, fife.Key.W],
+                            'run':        [fife.Key.LEFT_SHIFT]}
 
         # FIXME: deprecated
         engine.getEventManager().setNonConsumableKeys([
@@ -57,15 +59,15 @@ class Controller(EventListenerBase):
             evt.consume()
 
         # movement keys
-        elif keyval == self.keybindings['move_left']:
+        elif keyval in self.keybindings['move_left']:
             self.survivor.move_left  = True
-        elif keyval == self.keybindings['move_right']:
+        elif keyval in self.keybindings['move_right']:
             self.survivor.move_right = True
-        elif keyval == self.keybindings['move_down']:
+        elif keyval in self.keybindings['move_down']:
             self.survivor.move_down  = True
-        elif keyval == self.keybindings['move_up']:
+        elif keyval in self.keybindings['move_up']:
             self.survivor.move_up    = True
-        elif keyval == self.keybindings['run']:
+        elif keyval in self.keybindings['run']:
             self.survivor.run(True)
             print evt.getName()
 
@@ -83,15 +85,15 @@ class Controller(EventListenerBase):
         keyval = evt.getKey().getValue()
 
         # movement keys
-        if keyval ==  self.keybindings['move_left']:
+        if keyval   in self.keybindings['move_left']:
             self.survivor.move_left  = False
-        elif keyval == self.keybindings['move_right']:
+        elif keyval in self.keybindings['move_right']:
             self.survivor.move_right = False
-        elif keyval == self.keybindings['move_down']:
+        elif keyval in self.keybindings['move_down']:
             self.survivor.move_down  = False
-        elif keyval == self.keybindings['move_up']:
+        elif keyval in self.keybindings['move_up']:
             self.survivor.move_up    = False
-        elif keyval == self.keybindings['run']:
+        elif keyval in self.keybindings['run']:
             self.survivor.run(False)
 
     def mousePressed(self, evt):
