@@ -66,9 +66,16 @@ class Survivor(Agent):
         # TODO: check if there is something we can interact with at location
         if (self.weapon != None):
             my_loc = self.agent.getLocation().getMapCoordinates()
-            # Add constant so as to not to 
+
+            # Face target
+            face_loc = fife.Location(self.layer)
+            face_loc.setExactLayerCoordinates(target)
+            self.agent.setFacingLocation(face_loc)
+
+            # Add constant so as to not to fire from the players feet
             my_loc.x += self.FIRING_OFFSET_X
             my_loc.y += self.FIRING_OFFSET_Y
+
             bullet = self.weapon.fire_at(my_loc, target)
             if bullet:
                 bullet.create(self.engine.getModel(), self.layer)
