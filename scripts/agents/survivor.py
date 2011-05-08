@@ -20,6 +20,7 @@ import random
 from math import hypot
 from agent import Agent
 from time import time
+from fife import *
 from fife.extensions.fife_settings import Setting
 from scripts.weapons import *
 
@@ -169,24 +170,33 @@ class Survivor(Agent):
         x *= step
         y *= step
 
-        pos = self.agent.getLocation()
-        cord = pos.getExactLayerCoordinates()
-        cord.x += x * 10
-        cord.y += y * 10
-        pos.setExactLayerCoordinates(cord)
-        self.agent.setFacingLocation(pos)
-        
-        cord.x -= x * 9
-        cord.y -= y * 9
-        pos.setExactLayerCoordinates(cord)
+        cur_loc = self.agent.getLocation()
+
+        # Construct the new location to face
+        face_cord = cur_loc.getExactLayerCoordinates()
+        face_cord.x += x * 10 # Arbitrary number > 1
+        face_cord.y += y * 10
+        face_loc = fife.Location(cur_loc.getLayer())
+        face_loc.setExactLayerCoordinates(face_cord)
+
+        # Change facing direction
+        self.agent.setFacingLocation(face_loc)
+
+        # Construct the new player location
+        new_cord = cur_loc.getExactLayerCoordinates()
+        new_cord.x += x
+        new_cord.y += y
+        new_loc = fife.Location(cur_loc.getLayer())
+        new_loc.setExactLayerCoordinates(new_cord)
 
         # Make sure the space is not blocked
-        instances = self.agent.getLocationRef().getLayer().getInstancesAt(pos)
+        instances = self.agent.getLocationRef().getLayer().getInstancesAt(new_loc)
         for i in instances:
             if i.getId() == 'player':
                 continue
             if i.isBlocking():
                 return
 
-        self.agent.setLocation(pos)
+        # Update location
+        self.agent.setLocation(new_loc)
 
