@@ -27,10 +27,12 @@ from scripts.weapons import *
 
 _STATE_NONE, _STATE_IDLE, _STATE_RUN, _STATE_KICK, _STATE_TALK = xrange(5)
 
-STAMINA = 10
-STAMINARECOVERY = 10
-
 class Survivor(Agent):
+    FIRING_OFFSET_X = 0.5
+    FIRING_OFFSET_Y = -0.5
+    STAMINA = 10
+    STAMINARECOVERY = 10
+
     def __init__(self, engine, settings, agentName, layer, uniqInMap=True):
         super(Survivor, self).__init__(settings, None, agentName, layer, uniqInMap)
         self.engine      = engine
@@ -52,14 +54,20 @@ class Survivor(Agent):
 
         self._score           = 0
         self._lives           = 3
-        self._staminarecovery = STAMINARECOVERY
+        self._staminarecovery = self.STAMINARECOVERY
         self.recovery         = 5.0
         self.init()
+
+    def face(self, target):
+        loc = self.agent.getFacingLocation().getExactLayerCoordinates()
 
     def take_action(self, target):
         # TODO: check if there is something we can interact with at location
         if (self.weapon != None):
             my_loc = self.agent.getLocation().getMapCoordinates()
+            # Add constant so as to not to 
+            my_loc.x += self.FIRING_OFFSET_X
+            my_loc.y += self.FIRING_OFFSET_Y
             bullet = self.weapon.fire_at(my_loc, target)
             if bullet:
                 bullet.create(self.engine.getModel(), self.layer)
@@ -68,7 +76,7 @@ class Survivor(Agent):
     def init(self):
         self._hitpoints = 10
         self._dead = False
-        self._stamina = STAMINA
+        self._stamina = self.STAMINA
         self._exhausted = False
 
     def respawn(self):
@@ -136,9 +144,9 @@ class Survivor(Agent):
             self._exhausted = True
             self._staminarecovery -= self.recovery * timediff
         if self._staminarecovery <= 0:
-            self._exhausted = False
-            self._stamina = STAMINA
-            self._staminarecovery = STAMINARECOVERY
+            self._exhausted       = False
+            self._stamina         = self.STAMINA
+            self._staminarecovery = self.STAMINARECOVERY
 
         x = 0
         y = 0
