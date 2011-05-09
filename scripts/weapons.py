@@ -93,7 +93,7 @@ class Pistol(Weapon):
 class Shotgun(Weapon):
     PROJECTILES = 10
     ATTACK_RATE = 1.0
-    DAMAGE      = 10.0
+    DAMAGE      = 3.0
     PROJECTILE  = 'bullet'
     SPEED       = 100.0
     TTL         = 0.5
