@@ -31,7 +31,7 @@ class Weapon(object):
 
     def fire(self, origin, direction):
         now = time()
-        if time() - self._last_shot > self.get_delay():
+        if time() - self._last_shot > self.TTL: 
             direction.normalize()
             self._last_shot = now
             return Projectile(self.PROJECTILE, origin, direction,
