@@ -26,6 +26,7 @@ _WEAPON_RANGED, _WEAPON_MELEE = xrange(2)
 
 class Weapon(object):
     def __init__(self, owner):
+        super(Weapon,self).__init__()
         self.owner = owner
         self._last_shot = 0
 

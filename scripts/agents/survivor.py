@@ -17,10 +17,10 @@
 ########################################################################
 import random
 
-from math import hypot
 from agent import Agent
 from time import time
 from fife import *
+from fife.fife import DoublePoint3D
 from fife.extensions.fife_settings import Setting
 from scripts.weapons import *
 
@@ -28,7 +28,7 @@ from scripts.weapons import *
 
 _STATE_NONE, _STATE_IDLE, _STATE_RUN, _STATE_KICK, _STATE_TALK = xrange(5)
 
-class Survivor(Agent):
+class Survivor(Agent,Movable):
     FIRING_OFFSET_X = 0.5
     FIRING_OFFSET_Y = -0.5
     STAMINA = 10
@@ -36,16 +36,14 @@ class Survivor(Agent):
 
     def __init__(self, engine, settings, agentName, layer, uniqInMap=True):
         super(Survivor, self).__init__(settings, None, agentName, layer, uniqInMap)
+        self.setupMovable(self.agent)
         self.engine      = engine
-        #self.agent.setOverrideBlocking(True)
-        #self.agent.setBlocking(False)
         self.state       = _STATE_NONE
         self.idlecounter = 1
         self.move_left   = False
         self.move_right  = False
         self.move_up     = False
         self.move_down   = False
-        self.last_update = time()
         self.speed       = 6.5
         self.sprint      = 5.0
         self.running     = 10.0
@@ -72,7 +70,7 @@ class Survivor(Agent):
             face_loc.setExactLayerCoordinates(target)
             self.agent.setFacingLocation(face_loc)
 
-            # Add constant so as to not to fire from the players feet
+            # Add constant to avoid player from firing from the feet
             my_loc.x += self.FIRING_OFFSET_X
             my_loc.y += self.FIRING_OFFSET_Y
 
@@ -129,9 +127,9 @@ class Survivor(Agent):
             self.speed = self.walking
 
     def update(self):
-        timediff = time() - self.last_update
-        self.last_update = time()
-        
+        # Sets up timediff
+        self.newFrame()
+
         actually_moving = (self.move_left ^ self.move_right or 
                            self.move_up ^ self.move_down)
         
@@ -143,59 +141,37 @@ class Survivor(Agent):
             self.state = _STATE_RUN
             self.agent.act('run', self.agent.getFacingLocation())
 
-        step = self.speed * timediff
-
         if self.speed == self.running and not self._exhausted:
-            self._stamina -= self.sprint * timediff
+            self._stamina -= self.sprint * self.timediff
         if self._stamina <= 0:
             self.run(False)
             self._exhausted = True
-            self._staminarecovery -= self.recovery * timediff
+            self._staminarecovery -= self.recovery * self.timediff
         if self._staminarecovery <= 0:
             self._exhausted       = False
             self._stamina         = self.STAMINA
             self._staminarecovery = self.STAMINARECOVERY
 
-        x = 0
-        y = 0
+        self.direction = DoublePoint3D(0,0)
         if (self.move_left):
-            x -= 1
-            y -= 1
+            self.direction.x -= 1
+            self.direction.y -= 1
         if (self.move_right):
-            x += 1
-            y += 1
+            self.direction.x += 1
+            self.direction.y += 1
         if (self.move_up):
-            x += 1
-            y -= 1
+            self.direction.x += 1
+            self.direction.y -= 1
         if (self.move_down):
-            x -= 1
-            y += 1
-        l = hypot(x,y)
-        assert l != 0, "Was actually moving at speed 0; shouldn't happen."
-        x /= l
-        y /= l
-        x *= step
-        y *= step
+            self.direction.x -= 1
+            self.direction.y += 1
+        self.direction.normalize()
 
-        cur_loc = self.agent.getLocation()
+        assert self.direction.length() != 0, "Was actually moving at speed 0; shouldn't happen."
 
-        # Construct the new location to face
-        face_cord = cur_loc.getExactLayerCoordinates()
-        face_cord.x += x * 10 # Arbitrary number > 1
-        face_cord.y += y * 10
-        face_loc = fife.Location(cur_loc.getLayer())
-        face_loc.setExactLayerCoordinates(face_cord)
+        self.move()
 
-        # Change facing direction
-        self.agent.setFacingLocation(face_loc)
-
-        # Construct the new player location
-        new_cord = cur_loc.getExactLayerCoordinates()
-        new_cord.x += x
-        new_cord.y += y
-        new_loc = fife.Location(cur_loc.getLayer())
-        new_loc.setExactLayerCoordinates(new_cord)
-
+    def movePredicate(self,new_loc):
         # Make sure the space is not blocked
         instances = self.agent.getLocationRef().getLayer().getInstancesAt(new_loc)
         for i in instances:
@@ -204,6 +180,4 @@ class Survivor(Agent):
             if i.isBlocking():
                 return
 
-        # Update location
-        self.agent.setLocation(new_loc)
 

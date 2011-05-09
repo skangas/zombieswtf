@@ -21,9 +21,11 @@ from fife import fife
 from fife.fife import InstanceVisual
 from scripts.util import get_direction
 from time import time
+from scripts.movable import *
 
-class Projectile():
+class Projectile(Movable):
     def __init__(self, name, loc, direction, speed, ttl, damage, owner):
+        super(Projectile, self).__init__()
         self._name       = name
         self.loc         = loc
         self.direction   = direction
@@ -32,12 +34,11 @@ class Projectile():
         self.damage      = damage
         self.owner       = owner
 
-        self.created      = False
-        self.has_hit      = False
+        self.created     = False
+        self.has_hit     = False
 
-        self._started     = time()
-        self._last_update = time()
-        self._instance   = None
+        self._started    = time()
+        self._instance   = None   
 
     def create(self, model, layer):
         self.layer = layer
@@ -50,6 +51,7 @@ class Projectile():
         self._instance = inst
         self._instance.setOverrideBlocking(True)
         self._instance.setBlocking(False)
+        self.setupMovable(self._instance)
         self.created = True
 
     def get_position(self):
@@ -60,30 +62,12 @@ class Projectile():
         if not self.created:
             return
 
+        self.newFrame()
+
         if time() - self._started > self.ttl:
             self.has_hit = True
 
         if self.has_hit:
             return
 
-        # basically copy from survivor :(
-
-        timediff = time() - self._last_update
-        step = self.speed * timediff
-        self._last_update = time()
-
-        x = step * self.direction.x
-        y = step * self.direction.y
-
-        pos = self._instance.getLocation()
-        cord = pos.getExactLayerCoordinates()
-        cord.x += x * 10
-        cord.y += y * 10
-        pos.setExactLayerCoordinates(cord)
-        self._instance.setFacingLocation(pos)
-        
-        cord.x -= x * 9
-        cord.y -= y * 9
-        pos.setExactLayerCoordinates(cord)
-
-        self._instance.setLocation(pos)
+        self.move()
