@@ -48,7 +48,7 @@ class Survivor(Agent,Movable):
         self.sprint      = 5.0
         self.running     = 10.0
         self.walking     = 5.0
-        self.weapon      = Axe(self)
+        self.weapon      = Shotgun(self)
         self.projectiles = []
 
         self._score           = 0
@@ -74,10 +74,10 @@ class Survivor(Agent,Movable):
             my_loc.x += self.FIRING_OFFSET_X
             my_loc.y += self.FIRING_OFFSET_Y
 
-            bullet = self.weapon.fire_at(my_loc, target)
-            if bullet:
-                bullet.create(self.engine.getModel(), self.layer)
-                self.projectiles.append(bullet)
+            bullets = self.weapon.fire_at(my_loc, target)
+            for b in bullets:
+                b.create(self.engine.getModel(), self.layer)
+                self.projectiles.append(b)
         
     def init(self):
         self._hitpoints = 10
