@@ -31,7 +31,6 @@ http://opengameart.org/content/chaingun-pistol-rifle-shotgun-shots
 ** Maps
 
 * Programming
-** Add qwerty-keybindings
 ** GUI
 *** Remove useless buttons on top
 *** Add menu when hitting escape
@@ -39,7 +38,6 @@ http://opengameart.org/content/chaingun-pistol-rifle-shotgun-shots
 - health
 - weapon/ammo
 - stamina
-** Fireing bullets from the player
 ** Implement more weapons (e.g. shotgun, rocket launcher, 
                            throw axes, boomerang, melee: pitchfork, spades etc)
 ** Using the mouse pointer to aim
@@ -54,15 +52,6 @@ http://opengameart.org/content/chaingun-pistol-rifle-shotgun-shots
 ** Lightning (seems hard to get right with FIFE currently)
 *** Set light on entire map (day/night/dawn/etc)
 *** Flashlight
-
-* Done things
-** DONE Moving zombies
-   CLOSED: [2011-05-03 Tue 13:13]
-*** DONE Aggro-range
-    CLOSED: [2011-05-03 Tue 13:13]
-** DONE Speed of player not dependent on frame rate
-   CLOSED: [2011-04-30 Sat 23:11]
-
 * Future plans/crazy ideas
 ** RTS stuff??
 *** Build provisional towers, fences/walls and place mines
