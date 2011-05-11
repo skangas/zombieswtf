@@ -35,10 +35,10 @@ http://opengameart.org/content/chaingun-pistol-rifle-shotgun-shots
 ** GUI
 *** Remove useless buttons on top
 *** Add menu when hitting escape
-*** Begin creating a HUD
-- health
-- weapon/ammo
-- stamina
+*** Create a HUD
+- show health
+- show weapon/ammo
+- show running stamina
 ** Implement more weapons (e.g. shotgun, rocket launcher, 
                            throw axes, boomerang, melee: pitchfork, spades etc)
 ** Using the mouse pointer to aim
