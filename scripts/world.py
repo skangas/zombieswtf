@@ -58,7 +58,13 @@ class World(EventListenerBase):
         super(World, self).__init__(engine, regKeys=True)
         self.engine = engine
         self.model = engine.getModel()
-        
+        self.imagepool = self.engine.getImagePool()
+
+        # cursor_name = TDS.get("zombieswtf", "default_crosshair")
+        self.cursor_image = self.imagepool.addResourceFromFile("gui/crosshairs/crosshair6a.png")
+        self.cursor_x_offset = -32
+        self.cursor_y_offset = -32
+
         self.filename = ''
         # self.pump_ctr = 0 # for testing purposis
 
@@ -200,6 +206,11 @@ class World(EventListenerBase):
         """
         Called every frame.
         """
+
+        # Reset mouse cursor
+	self.engine.getCursor().set(fife.CURSOR_NONE)
+        self.engine.getCursor().setDrag(fife.CURSOR_IMAGE, self.cursor_image,
+                                        self.cursor_x_offset, self.cursor_y_offset)
 
         self.survivor.update()
 
