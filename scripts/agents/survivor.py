@@ -48,9 +48,10 @@ class Survivor(Agent,Movable):
         self.sprint      = 5.0
         self.running     = 10.0
         self.walking     = 5.0
-        self.weapon      = Shotgun(self)
         self.projectiles = []
 
+        self._current_weapon  = 0
+        self._weapons         = [Shotgun(self)]
         self._score           = 0
         self._lives           = 3
         self._staminarecovery = self.STAMINARECOVERY
@@ -62,7 +63,9 @@ class Survivor(Agent,Movable):
 
     def take_action(self, target):
         # TODO: check if there is something we can interact with at location
-        if (self.weapon != None):
+        if len(self._weapons) > 0:
+            weapon = self._weapons[self._current_weapon]
+
             my_loc = self.agent.getLocation().getMapCoordinates()
 
             # Face target
@@ -74,7 +77,7 @@ class Survivor(Agent,Movable):
             my_loc.x += self.FIRING_OFFSET_X
             my_loc.y += self.FIRING_OFFSET_Y
 
-            bullets = self.weapon.fire_at(my_loc, target)
+            bullets = weapon.fire_at(my_loc, target)
             for b in bullets:
                 b.create(self.engine.getModel(), self.layer)
                 self.projectiles.append(b)
