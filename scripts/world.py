@@ -17,6 +17,7 @@
 ########################################################################
 
 from fife import fife
+from fife.fife import LightRenderer, LightRendererNode
 import math, random
 from fife.extensions.loaders import loadMapFile
 from fife.extensions.savers import saveMapFile
@@ -31,6 +32,24 @@ from controller import Controller
 from scripts.agents.mob import *
 
 TDS = Setting(app_name="zombieswtf")
+
+DEFAULT_GLOBAL_LIGHT = {
+    "R" : 0.0,
+    "G" : 0.0,
+    "B" : 0.0,
+    "A" : 0.985
+}
+
+DEFAULT_SURVIVOR_LIGHT = {
+    "intensity" : 1,
+    "radius"    : 100,
+    "subdivs"   : 32,
+    "xstretch"  : 3,
+    "ystretch"  : 2,
+    "R"         : 150,
+    "G"         : 150,
+    "B"         : 150
+}
 
 class MapListener(fife.MapChangeListener):
     def __init__(self, map):
@@ -59,6 +78,10 @@ class World(EventListenerBase):
         self.engine = engine
         self.model = engine.getModel()
         self.imagepool = self.engine.getImagePool()
+
+        self._global_light = DEFAULT_GLOBAL_LIGHT
+        self._survivor_light_node = None
+        self._survivor_light_opts = DEFAULT_SURVIVOR_LIGHT
 
         # cursor_name = TDS.get("zombieswtf", "default_crosshair")
         self.cursor_image = self.imagepool.addResourceFromFile("gui/crosshairs/crosshair6a.png")
@@ -188,8 +211,23 @@ class World(EventListenerBase):
             renderer.setEnabled(True)
             renderer.clearActiveLayers()
             renderer.addActiveLayer(self.map.getLayer('ObjectLayer'))
-    
+            
+            self.updateLight()
+            
             self.target_rotation = self.cameras['main'].getRotation()
+
+    def updateLight(self):
+        renderer = fife.LightRenderer.getInstance(self.cameras['main'])
+        renderer.removeAll("survivors")
+        surv = self.agentlayer.getInstance('player')
+        node = LightRendererNode(surv, self.agentlayer)
+        self._survivor_light_node = node
+        opts = self._survivor_light_opts
+        renderer.addSimpleLight("survivors", node, opts['intensity'], opts['radius'],
+                                opts['subdivs'], opts['xstretch'], opts['ystretch'],
+                                opts['R'], opts['G'], opts['B'])
+        c = self._global_light
+        self.cameras['main'].setLightingColor(c['R'], c['G'], c['B'], c['A'])
 
     def reset(self):
         # if self.music:
