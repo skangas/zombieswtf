@@ -30,6 +30,7 @@ from fife.extensions.fife_settings import Setting
 from controller import Controller
 
 from scripts.agents.mob import *
+from scripts.extscheduler import ExtScheduler
 
 TDS = Setting(app_name="zombieswtf")
 
@@ -78,6 +79,8 @@ class World(EventListenerBase):
         self.engine = engine
         self.model = engine.getModel()
         self.imagepool = self.engine.getImagePool()
+
+        self.extscheduler = ExtScheduler()
 
         self._global_light = DEFAULT_GLOBAL_LIGHT
         self._survivor_light_node = None
@@ -245,10 +248,11 @@ class World(EventListenerBase):
         Called every frame.
         """
 
-        # Reset mouse cursor
 	self.engine.getCursor().set(fife.CURSOR_NONE)
         self.engine.getCursor().setDrag(fife.CURSOR_IMAGE, self.cursor_image,
                                         self.cursor_x_offset, self.cursor_y_offset)
+
+        self.extscheduler.tick()
 
         self.survivor.update()
 

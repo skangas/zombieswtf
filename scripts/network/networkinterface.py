@@ -56,8 +56,8 @@ class NetworkInterface(object):
 		self._client.register_callback("p2p_data", self._cb_p2p_data)
 		self.received_packets = []
 
-	def add_to_extscheduler(self):
-		ExtScheduler().add_new_object(self.ping, self, self.PING_INTERVAL, -1)
+	def add_to_extscheduler(self, scheduler):
+		scheduler.add_new_object(self.ping, self, self.PING_INTERVAL, -1)
 
 	def get_game(self):
 		game = self._client.game
