@@ -217,6 +217,8 @@ class World(EventListenerBase):
             self.target_rotation = self.cameras['main'].getRotation()
 
     def updateLight(self):
+        if self.lightmodel == 0:
+            return
         renderer = fife.LightRenderer.getInstance(self.cameras['main'])
         renderer.removeAll("survivors")
         surv = self.agentlayer.getInstance('player')
