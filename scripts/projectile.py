@@ -38,7 +38,8 @@ class Projectile(Movable):
         self.has_hit     = False
 
         self._started    = time()
-        self._instance   = None   
+        self._instance   = None
+        self._lastloc    = None
 
     def create(self, model, layer):
         self.layer = layer
@@ -54,10 +55,6 @@ class Projectile(Movable):
         self.setupMovable(self._instance)
         self.created = True
 
-    def get_position(self):
-        assert self._instance
-        return self._instance.getLocation()
-
     def update(self):
         if not self.created:
             return
@@ -70,4 +67,16 @@ class Projectile(Movable):
         if self.has_hit:
             return
 
+        self._lastloc = self.get_position()
+
         self.move()
+
+    def get_last_position(self):
+        if not self._lastloc:
+            return self.get_position()
+        else:
+            return self._lastloc
+
+    def get_position(self):
+        assert self._instance
+        return self._instance.getLocation()
