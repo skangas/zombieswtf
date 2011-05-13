@@ -181,6 +181,7 @@ class Survivor(Agent,Movable):
             if i.getId() == 'player':
                 continue
             if i.isBlocking():
-                return
+                return False
+        return True
 
 

@@ -69,6 +69,9 @@ class Movable(object):
         new_loc = fife.Location(cur_loc.getLayer())
         new_loc.setExactLayerCoordinates(new_cord)
 
+        if not self.movePredicate(new_loc):
+            return
+
         # Update location
         self.instance.setLocation(new_loc)
 
