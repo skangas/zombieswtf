@@ -212,6 +212,8 @@ class World(EventListenerBase):
             renderer.clearActiveLayers()
             renderer.addActiveLayer(self.map.getLayer('ObjectLayer'))
             
+            self._survivor_light_opts['radius'] = self.engine.getSettings().getScreenWidth() / 6
+            
             self.updateLight()
             
             self.target_rotation = self.cameras['main'].getRotation()
