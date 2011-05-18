@@ -29,6 +29,8 @@ from agents.survivor import Survivor
 from fife.extensions.fife_settings import Setting
 from controller import Controller
 
+from fife.fife import DoublePoint3D
+
 from scripts.agents.mob import *
 from scripts.extscheduler import ExtScheduler
 
@@ -215,11 +217,15 @@ class World(EventListenerBase):
             renderer.clearActiveLayers()
             renderer.addActiveLayer(self.map.getLayer('ObjectLayer'))
             
+            self._survivor_light_opts['radius'] = self.engine.getSettings().getScreenWidth() / 6
+            
             self.updateLight()
             
             self.target_rotation = self.cameras['main'].getRotation()
 
     def updateLight(self):
+        if self.lightmodel == 0:
+            return
         renderer = fife.LightRenderer.getInstance(self.cameras['main'])
         renderer.removeAll("survivors")
         surv = self.agentlayer.getInstance('player')
@@ -268,23 +274,37 @@ class World(EventListenerBase):
             p.update()
 
             # Collision detection for projectiles
+            pos_old = p.get_last_position()
             pos = p.get_position()
-            instances = p.layer.getInstancesAt(pos,False)
-            for i in instances:
-                if i.getObject().getId() in ('axe','player'):
-                    continue
+            
+            pt_loc = fife.Location(p.layer)
+            
+            # print "calling line points"
+            def escapeLoop():
+                for pt in line_points(pos_old, pos, 0.5):
+    
+                    pt_loc.setExactLayerCoordinates(pt)
 
-                if i.isBlocking():
-                    p.has_hit = True
-                    # TODO: implement our own collison box, such
-                    # that we can specify a more fine-grained
-                    # collision detection than what FIFEs engine
-                    # allows
-                    if i.getObject().getId() in ('zombie'):
-                        a  = self.instance_to_agent[i.getFifeId()]
-                        a.take_damage(p.damage)
+                    ## Bottleneck: linear in number of objects on map
+                    instances = p.layer.getInstancesAt(pt_loc,False)
                     
-        # self.survivor.projectiles = [ p for p in self.survivor.projectiles if not p.has_hit ]
+                    for i in instances:
+                        if i.getObject().getId() in ('axe','player'):
+                            continue
+        
+                        if i.isBlocking():
+                            p.has_hit = True
+                            # TODO: implement our own collison box, such
+                            # that we can specify a more fine-grained
+                            # collision detection than what FIFEs engine
+                            # allows
+                            if i.getObject().getId() in ('zombie'):
+                                a  = self.instance_to_agent[i.getFifeId()]
+                                a.take_damage(p.damage)
+                                ## if the projectile can hit several zombies then remove this return
+                                return
+            escapeLoop()
+
 
         for zombie in self.zombies:
             zombie.update()

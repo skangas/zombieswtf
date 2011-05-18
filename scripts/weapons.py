@@ -83,7 +83,7 @@ class Pistol(Weapon):
     ATTACK_RATE = 0.5
     DAMAGE      = 20.0
     PROJECTILE  = 'bullet'
-    SPEED       = 100.0
+    SPEED       = 1000.0
     TTL         = 0.5
     TYPE        = _WEAPON_RANGED
 
@@ -95,7 +95,7 @@ class Shotgun(Weapon):
     ATTACK_RATE = 1.0
     DAMAGE      = 3.0
     PROJECTILE  = 'bullet'
-    SPEED       = 100.0
+    SPEED       = 1000.0
     TTL         = 0.5
     TYPE        = _WEAPON_RANGED
     def __init__(self, owner):

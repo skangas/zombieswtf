@@ -51,7 +51,7 @@ class Survivor(Agent,Movable):
         self.projectiles = []
 
         self._current_weapon  = 0
-        self._weapons         = [Shotgun(self)]
+        self._weapons         = [Pistol(self)]
         self._score           = 0
         self._lives           = 3
         self._staminarecovery = self.STAMINARECOVERY
