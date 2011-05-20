@@ -25,6 +25,7 @@ from fife.extensions.fife_settings import Setting
 from fife.extensions import pychan
 from fife.extensions.pychan import widgets
 from scripts.common.eventlistenerbase import EventListenerBase
+from scripts.util import line_points
 from agents.survivor import Survivor
 from fife.extensions.fife_settings import Setting
 from controller import Controller
