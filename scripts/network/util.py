@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 ########################################################################
 # Copyright (C) 2011 The Unknown Horizons Team <team@unknown-horizons.org>
+# Copyright (C) 2011 Stefan Kangas
 ########################################################################
 # This file is part of ZombiesWTF.
 #
@@ -30,4 +31,3 @@ def uuidToString(u):
 def uuidFromString(s):
 	s = s.replace('-', '')
 	return [ int(s[i : i + 2], 16) for i in range(0, 32, 2) ]
-
